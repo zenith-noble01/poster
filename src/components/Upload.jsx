@@ -17,8 +17,8 @@ const Upload = ({ file, setFile, setAllow, allow }) => {
   };
 
   const handleDeleteTag = (tag) => {
-    tagged.pop(tag.id);
-    setTagged([...tagged]);
+    const newTagged = tagged.filter((t) => t.id !== tag.id);
+    setTagged(newTagged);
   };
 
   useEffect(() => {
