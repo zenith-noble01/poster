@@ -2,7 +2,7 @@ import cloudinary from "../config/cloudinary.js";
 import Post from "../models/post.js";
 import User from "../models/user.js";
 
-const createNewPoster = async (req, res) => {
+const createPost = async (req, res) => {
   try {
     const { userId, postImg, description, title, isAllowed } = req.body;
 
@@ -176,7 +176,7 @@ const getUserPost = async (req, res) => {
 };
 
 export {
-  createNewPoster,
+  createPost,
   getAllPost,
   getUserPost,
   likePost,

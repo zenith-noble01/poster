@@ -5,6 +5,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import conversationRoute from "./routes/conversationRoute.js";
 import userRoute from "./routes/userRoute.js";
+import postRoute from "./routes/postRoute.js";
 
 dotenv.config();
 
@@ -16,12 +17,14 @@ app.use(
     origin: "*",
   })
 );
+
 app.use(morgan("dev"));
 app.use(express.json());
 
 // routes
 app.use("/api/conversation", conversationRoute);
 app.use("/api/auth", userRoute);
+app.use("/api/post", postRoute);
 
 connectDb();
 

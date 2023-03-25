@@ -23,6 +23,6 @@ const postModel = new mongoose.Schema({
   },
 });
 
-const Post = mongoose.model("user", postModel);
+const Post = mongoose.model("post", postModel);
 
 export default Post;

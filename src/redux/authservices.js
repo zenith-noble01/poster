@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const AUTH__URL = "https://locahost:5000/api/auth/";
+const AUTH__URL = "http://localhost:3000/api/auth";
 
 const registerStudent = async (studentData) => {
   const response = await axios.post(AUTH__URL + "register", studentData);
