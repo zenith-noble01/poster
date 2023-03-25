@@ -1,0 +1,55 @@
+@import "./variables";
+@import "./constants";
+
+.app__navbar {
+  height: 70px;
+  @include flexAlign;
+  background: var(--primary-color);
+  padding: 0 $gap;
+  border-bottom: var(--border);
+  @include flexBetween;
+  position: sticky;
+  top: 0;
+  z-index: 9;
+
+  .input__container {
+    flex: 0.4;
+    background: var(--secondary-color);
+    @include flexAlign;
+    border-radius: 8px;
+    padding: 0 0.4rem;
+
+    &:focus {
+      border: 10px solid red;
+    }
+
+    input {
+      flex: 1;
+      @include input;
+      padding-left: $sm-gap;
+      color: var(--text-color);
+    }
+    .icon {
+      height: 30px;
+      width: 30px;
+      background: var(--primary-color);
+      font-size: 1rem;
+      border-radius: 5px;
+      @include flexCenter;
+      cursor: pointer;
+    }
+  }
+
+  button {
+    @include button;
+    background: var(--g-color);
+    border-radius: 8px;
+    gap: 0.5rem;
+    color: whitesmoke;
+    @include flexAlign;
+
+    svg {
+      font-size: 1.2rem;
+    }
+  }
+}

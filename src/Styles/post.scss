@@ -1,0 +1,102 @@
+@import "./constants";
+@import "./variables";
+
+.app__post {
+  @include flexDirection(row);
+  width: 100%;
+
+  .post__container {
+    @include flexDirection(column);
+    gap: $gap;
+    // @include flexCenter;
+
+    .poster__container {
+      width: 90%;
+      height: 80%;
+      background: var(--primary-color);
+      border: var(--border);
+      margin: 0 auto;
+      border-radius: $gap;
+      overflow: hidden;
+      @include flexDirection(row);
+      box-shadow: 0 0 6px rgb(0, 0, 0, 0.2);
+
+      .left__poster {
+        flex: 1;
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+          object-position: top;
+        }
+      }
+
+      .right__poster {
+        flex: 1;
+
+        position: relative;
+
+        .poster__header {
+          @include flexAlign;
+          @include flexBetween;
+          padding: $sm-gap;
+          border-bottom: var(--border);
+
+          .user {
+            @include flexAlign;
+            gap: $sm-gap;
+            img {
+              @include userProfile;
+            }
+          }
+
+          a {
+            @include button;
+            color: whitesmoke;
+            cursor: pointer;
+            background: var(--g-color);
+            @include flexCenter;
+            border-radius: 8px;
+          }
+
+          svg {
+            font-size: $gap;
+            cursor: pointer;
+          }
+        }
+
+        .poster__desc {
+          padding: $sm-gap;
+        }
+
+        .poster__comment {
+          position: absolute;
+          bottom: 0;
+          @include flexDirection(row);
+          gap: $sm-gap;
+          width: 100%;
+          padding: $sm-gap;
+          border-top: var(--border);
+
+          img {
+            @include userProfile;
+          }
+
+          .input__container {
+            background: var(--secondary-color);
+            @include flexAlign;
+            flex: 1;
+            padding-right: $sm-gap;
+            border-radius: 8px;
+
+            input {
+              @include input;
+              flex: 1;
+              color: var(--text-color);
+            }
+          }
+        }
+      }
+    }
+  }
+}

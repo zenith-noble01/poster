@@ -1,0 +1,155 @@
+@import "./variables";
+@import "./constants";
+
+.app__messenger {
+  width: 100%;
+  @include flexDirection(column);
+  .messenger__container {
+    height: calc(100vh - 70px);
+    @include flexDirection(row);
+    .messenger__sidebar {
+      height: 100%;
+      @include flexDirection(column);
+      background: var(--primary-color);
+      flex: 1;
+      border-right: var(--border);
+
+      /*    .search__container {
+        @include flexAlign;
+        width: 100%;
+        border-bottom: var(--border);
+        background: var(--secondary-color);
+        padding-right: $sm-gap;
+        margin: 0 auto;
+
+        input {
+          flex: 1;
+          color: var(--text-color);
+          @include input;
+        }
+      } */
+
+      .sidebar__conversations {
+        flex: 1;
+        padding: $sm-gap;
+        overflow-y: auto;
+        @include flexDirection(column);
+        gap: 0.5rem;
+
+        .conversation {
+          @include flexAlign;
+          gap: $sm-gap;
+          padding: 0.3rem;
+          cursor: pointer;
+          transition: $trans;
+          border-radius: 5px;
+
+          img {
+            @include userProfile;
+            object-position: top;
+          }
+
+          .user__information {
+            @include flexDirection(column);
+
+            span {
+              font-size: 0.8rem;
+              color: #989898;
+            }
+          }
+
+          &:hover {
+            background: var(--acent-color);
+          }
+        }
+      }
+    }
+
+    .message__container {
+      @include flexDirection(column);
+      flex: 3;
+
+      .message__wrapper {
+        flex: 1;
+        overflow-y: auto;
+        @include flexDirection(column);
+        gap: $sm-gap;
+        padding: $sm-gap;
+        width: 100%;
+
+        .message {
+          width: 100%;
+          @include flexDirection(row);
+
+          &.not {
+            .message__container {
+              max-width: 60%;
+              background: var(--dashed);
+              padding: 0.5rem;
+              border-radius: 5px;
+              position: relative;
+              padding-left: $gap;
+              p {
+                height: 100%;
+                width: 20px;
+                background: var(--secondary-color);
+                position: absolute;
+                left: 0;
+                top: 0;
+                border-bottom-right-radius: 10px;
+              }
+            }
+          }
+
+          &.own {
+            justify-content: flex-end;
+            .message__container {
+              max-width: 60%;
+              background: var(--primary-color);
+              padding: 0.7rem;
+              border-radius: 5px;
+              position: relative;
+              padding-right: $gap;
+              p {
+                height: 100%;
+                width: 20px;
+                background: var(--secondary-color);
+                position: absolute;
+                right: 0;
+                top: 0;
+                border-bottom-left-radius: 10px;
+              }
+            }
+          }
+        }
+      }
+
+      .input__container {
+        @include flexAlign;
+        background: var(--primary-color);
+        border-top: var(--border);
+        padding: $sm-gap;
+        gap: $sm-gap;
+
+        textarea {
+          flex: 1;
+          background: var(--secondary-color);
+          outline: none;
+          border: none;
+          padding: 0.5rem;
+          resize: none;
+          font-family: inherit;
+          color: var(--text-color);
+          border-radius: 8px;
+        }
+
+        button {
+          @include button;
+          background: var(--g-color);
+          color: whitesmoke;
+          border-radius: 8px;
+        }
+      }
+    }
+  }
+}

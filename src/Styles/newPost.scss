@@ -1,0 +1,269 @@
+@import "./constants";
+@import "./variables";
+
+.app__newpost__container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background: rgba(19, 19, 19, 0.518);
+  @include flexCenter;
+  z-index: 999;
+
+  .newpost__container {
+    width: 70%;
+    height: 90%;
+    background: var(--primary-color);
+    border-radius: $gap;
+    padding: $gap;
+    @include flexDirection(column);
+    gap: $gap;
+
+    .container__header {
+      @include flexBetween;
+
+      p {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      svg {
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+      .plus {
+        transform: rotate(45deg);
+      }
+    }
+
+    .upload__container {
+      flex: 1;
+      border: 1px dashed var(--dashed);
+      border-radius: $gap;
+      overflow: hidden;
+
+      label {
+        height: 100%;
+        width: 100%;
+        @include flexCenter;
+        @include flexDirection(column);
+        cursor: pointer;
+        position: relative;
+        gap: $sm-gap;
+
+        p {
+          text-align: center;
+          font-weight: bold;
+        }
+
+        span {
+          position: absolute;
+          bottom: $gap;
+          font-weight: bold;
+        }
+      }
+
+      svg {
+        font-size: 2rem;
+      }
+    }
+
+    .another {
+      padding: $sm-gap;
+      background: var(--acent-color);
+      border-radius: $sm-gap;
+      @include flexBetween;
+      font-weight: bold;
+
+      button {
+        @include button;
+        background: var(--primary-color);
+        border-radius: 10px;
+        color: inherit;
+      }
+    }
+  }
+
+  .file__uploadContainer {
+    width: 100%;
+    height: 100%;
+    background: var(--primary-color);
+    padding: $gap;
+    @include flexDirection(column);
+    gap: $gap;
+    .uploader__header {
+      border-bottom: var(--border);
+      @include flexBetween;
+      padding-bottom: $sm-gap;
+
+      p {
+        cursor: pointer;
+      }
+
+      button {
+        @include button;
+        background: var(--acent-color);
+        padding: 0.5rem 3rem;
+        color: var(--text-color);
+        border-radius: 8px;
+      }
+    }
+
+    .uploader__container {
+      flex: 1;
+      @include flexAlign;
+      gap: $gap;
+      width: 80%;
+      margin: 0 auto;
+
+      .left__uploader {
+        flex: 0.5;
+        height: 536.355px;
+        border-radius: $gap;
+        overflow-y: hidden;
+
+        img {
+          object-fit: cover;
+          height: 100%;
+        }
+      }
+      .right__uploader {
+        flex: 1;
+        height: 100%;
+        background: var(--secondary-color);
+        box-shadow: 0 0 6px rgb(0, 0, 0, 0.2);
+        border-radius: $sm-gap;
+        padding: $gap;
+        @include flexDirection(column);
+        gap: $sm-gap;
+
+        p {
+          font-weight: bold;
+          font-size: 1.5rem;
+        }
+
+        form {
+          @include flexDirection(column);
+          gap: $sm-gap;
+
+          .input__container {
+            @include flexDirection(column);
+            gap: 0.5rem;
+            position: relative;
+
+            label {
+              font-size: 0.8rem;
+            }
+
+            input {
+              @include input;
+              border: 1px solid var(--dashed);
+              color: var(--text-color);
+            }
+            textarea {
+              height: 100%;
+              background: transparent;
+              outline: none;
+              resize: none;
+              border: var(--border);
+              border-radius: 5px;
+              padding: $sm-gap;
+              font-family: inherit;
+              color: var(--text-color);
+            }
+
+            select {
+              @include input;
+              border: 1px solid var(--dashed);
+            }
+
+            .tags__container {
+              @include flexAlign;
+              gap: $sm-gap;
+              flex-wrap: wrap;
+              p {
+                font-size: 1rem;
+                background: var(--primary-color);
+                width: fit-content;
+                padding: 0.5rem;
+                border-radius: 8px;
+                @include flexAlign;
+                gap: 0.5rem;
+                text-transform: capitalize;
+                svg {
+                  transform: rotate(45deg);
+                  cursor: pointer;
+                }
+              }
+            }
+
+            .search__container {
+              position: absolute;
+              background: var(--primary-color);
+              bottom: -8rem;
+              width: 100%;
+              z-index: 1;
+              padding: $sm-gap;
+              border-radius: $sm-gap;
+              max-height: 200px;
+              overflow-y: auto;
+              height: 125px;
+              min-height: fit-content;
+              @include flexDirection(column);
+              gap: 0.5rem;
+              li {
+                transition: $trans;
+                padding: 0.5rem;
+
+                &:hover {
+                  background: green;
+                  cursor: pointer;
+                }
+              }
+            }
+
+            & > span {
+              font-size: 0.7rem;
+            }
+          }
+
+          .Comment__option {
+            @include flexAlign;
+            width: 100%;
+            gap: $sm-gap;
+            .ball__slider {
+              height: 30px;
+              width: 60px;
+              background: var(--primary-color);
+              border-radius: 15px;
+              position: relative;
+              cursor: pointer;
+              transition: $trans;
+              box-shadow: 0 0 6px rgb(0, 0, 0, 0.2);
+
+              .ball {
+                height: 30px;
+                width: 30px;
+                background: var(--dashed);
+                border-radius: 50%;
+                position: absolute;
+                left: 0;
+                transition: $trans;
+
+                &.active {
+                  left: 30px;
+                  background: $text-color;
+                }
+              }
+
+              &.active {
+                background: $b-color;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

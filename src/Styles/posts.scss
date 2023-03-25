@@ -1,0 +1,11 @@
+@import "./variables";
+@import "./constants";
+
+.home__posts {
+  width: 100%;
+  min-height: 100vh;
+
+  img {
+    border-radius: 1rem;
+  }
+}

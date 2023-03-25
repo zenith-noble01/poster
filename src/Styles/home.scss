@@ -1,0 +1,18 @@
+@import "./variables";
+@import "./constants";
+
+.app__home {
+  width: 100%;
+  @include flexDirection(row);
+  background: var(--secondary-color);
+  min-height: 100vh;
+
+  .home__container {
+    @include flexDirection(column);
+
+    .home__content {
+      @include flexDirection(column);
+      padding: $gap;
+    }
+  }
+}

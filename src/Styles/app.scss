@@ -1,0 +1,57 @@
+@import "./variables";
+@import "./constants";
+
+:root {
+  --primary-color: #1e1f23;
+  --secondary-color: #17181c;
+  --acent-color: #27282f;
+  --g-color: #438b04;
+  --n-bg: #34353e;
+  --dashed: #34353e;
+  --red-color: #e5453f;
+  --text-color: whitesmoke;
+  --border: 2px solid #27292f;
+  --tg-color: #091e01;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+}
+
+.outlet {
+  width: 75%;
+}
+
+.App {
+  background: var(--secondary-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  transition: all $trans;
+
+  &[data-theme="light"] {
+    --primary-color: #ffffff;
+    --secondary-color: #f9f9f9;
+    --acent-color: #f9f9f9;
+    --g-color: #438b04;
+    --border: 2px solid rgba(128, 128, 128, 0.214);
+    --text-color: #444;
+    --dashed: #72727285;
+    --n-bg: white;
+  }
+
+  .app__container {
+    background: red;
+    @include flexDirection(column);
+    gap: $gap;
+  }
+}
