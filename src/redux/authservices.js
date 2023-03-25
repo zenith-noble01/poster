@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const AUTH__URL = "https://ticorg.herokuapp.com/api/auth/";
+const AUTH__URL = "https://locahost:5000/api/auth/";
 
 const registerStudent = async (studentData) => {
   const response = await axios.post(AUTH__URL + "register", studentData);

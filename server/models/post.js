@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const postModel = new mongoose({
+const postModel = new mongoose.Schema({
   userId: {
     type: String,
     require: true,

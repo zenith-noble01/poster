@@ -14,7 +14,7 @@ const Login = () => {
     <div className="app__auth login">
       <form onSubmit={handleSubmit}>
         <p className="auth__header">
-          CodeMedia <span>Login</span>
+          Poster <span>Login</span>
         </p>
         <div className="input__container">
           <input type="email" placeholder="Email..." />

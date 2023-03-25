@@ -1,10 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import "../Styles/auth.scss";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../redux/authSlice";
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const [userData, setUserData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const { username, email, password } = userData;
+
+  const handleChange = (e) => {
+    setUserData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const user = {
+      username,
+      email,
+      password,
+    };
+
+    dispatch(registerUser(user));
   };
 
   const handleGoogleAuth = () => {};
@@ -12,21 +38,41 @@ const Register = () => {
 
   return (
     <div className="app__auth register">
-      <form onSubmit={handleSubmit}>
+      <form>
         <p className="auth__header">
-          CodeMedia <span>Register</span>
+          Poster <span>Register</span>
         </p>
         <div className="input__container">
-          <input type="text" placeholder="Username..." />
+          <input
+            onChange={handleChange}
+            value={username}
+            name="username"
+            type="text"
+            placeholder="Username..."
+          />
         </div>
         <div className="input__container">
-          <input type="email" placeholder="Email..." />
+          <input
+            onChange={handleChange}
+            value={email}
+            name="email"
+            type="email"
+            placeholder="Email..."
+          />
         </div>
         <div className="input__container">
-          <input type="password" placeholder="Password..." />
+          <input
+            onChange={handleChange}
+            value={password}
+            name="password"
+            type="password"
+            placeholder="Password..."
+          />
         </div>
 
-        <button className="auth__action">Register</button>
+        <button className="auth__action" onClick={handleSubmit}>
+          Register
+        </button>
         <div className="or__container">
           <div className="or__text">
             <p>OR</p>

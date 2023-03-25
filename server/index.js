@@ -1,11 +1,30 @@
-import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
+import { connectDb } from "./config/db.js";
+import morgan from "morgan";
+import dotenv from "dotenv";
+import conversationRoute from "./routes/conversationRoute.js";
+import userRoute from "./routes/userRoute.js";
 
-const app = express();
 dotenv.config();
 
-app.use(express.json());
-app.use(cors());
+const app = express();
 
-app.listen(5000, console.log("server is running"));
+//middlewares
+app.use(
+  cors({
+    origin: "*",
+  })
+);
+app.use(morgan("dev"));
+app.use(express.json());
+
+// routes
+app.use("/api/conversation", conversationRoute);
+app.use("/api/auth", userRoute);
+
+connectDb();
+
+const port = 5000;
+
+app.listen(port, () => console.log(`Server listening on ${port}`));

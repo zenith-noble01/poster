@@ -1,4 +1,4 @@
-import Conversation from "../models/conversation";
+import Conversation from "../models/conversation.js";
 
 //new conv
 

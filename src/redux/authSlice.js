@@ -11,11 +11,11 @@ const initialState = {
   message: "",
 };
 
-export const registerStudent = createAsyncThunk(
+export const registerUser = createAsyncThunk(
   "auth/register",
   async (student, thunkAPI) => {
     try {
-      return await authServices.registerStudent(student);
+      return await authServices.registerUser(student);
     } catch (error) {
       const message =
         (error.response &&
@@ -61,15 +61,15 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(registerStudent.pending, (state) => {
+      .addCase(registerUser.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(registerStudent.fulfilled, (state, action) => {
+      .addCase(registerUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.student = action.payload;
       })
-      .addCase(registerStudent.rejected, (state, action) => {
+      .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
