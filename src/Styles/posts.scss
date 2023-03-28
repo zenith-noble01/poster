@@ -5,6 +5,18 @@
   width: 100%;
   min-height: 100vh;
 
+  .post__container {
+    background: var(--primary-color);
+    box-shadow: var(--shadow);
+    transition: $trans;
+    border-radius: $sm-gap;
+
+    .poster__img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
   img {
     border-radius: 1rem;
   }

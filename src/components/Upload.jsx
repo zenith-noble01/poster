@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { toast, Toaster } from "react-hot-toast";
 import { FaPlus } from "react-icons/fa";
 import { tags } from "../Constants";
 
@@ -12,8 +13,13 @@ const Upload = ({ file, setFile, setAllow, allow }) => {
   );
 
   const handleChangeTag = (tag) => {
-    setTagged([...tagged, tag]);
-    setSearchTerm("");
+    const newTag = tagged.find((t) => t.id === tag.id);
+    if (newTag) {
+      return toast.error("tag already exists");
+    } else {
+      setTagged([...tagged, tag]);
+      setSearchTerm("");
+    }
   };
 
   const handleDeleteTag = (tag) => {
@@ -31,6 +37,7 @@ const Upload = ({ file, setFile, setAllow, allow }) => {
 
   return (
     <div className="file__uploadContainer">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="uploader__header">
         <p onClick={() => setFile(null)}>Back</p>
         <button>Publish</button>

@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import "../Styles/auth.scss";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../redux/authSlice";
 
 const Register = () => {
   const dispatch = useDispatch();
+
+  const { message, student, isLoading, isSuccess, isError } = useSelector(
+    (state) => state.auth
+  );
   const [userData, setUserData] = useState({
     username: "",
     email: "",
@@ -30,10 +34,14 @@ const Register = () => {
       password,
     };
 
-    console.log(user);
-
     dispatch(registerUser(user));
+
+    // console.log(user);
   };
+
+  if (isError) {
+    console.log(isError);
+  }
 
   const handleGoogleAuth = () => {};
   const handleGitHubAuth = () => {};

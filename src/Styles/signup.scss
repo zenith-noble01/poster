@@ -1,0 +1,110 @@
+@import "./variables";
+@import "./constants";
+
+.app__signup {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  @include flexCenter;
+
+  .signup__container {
+    border: var(--border);
+    padding: $gap;
+    border-radius: $sm-gap;
+    @include flexDirection(column);
+    gap: $sm-gap;
+
+    .cta__btns {
+      @include flexDirection(column);
+      gap: $sm-gap;
+
+      button {
+        @include button;
+        border-radius: 20px;
+        @include flexAlign;
+        justify-content: center;
+        gap: $sm-gap;
+        background: var(--secondary-color);
+        border: var(--border);
+        color: var(--text-color);
+        position: relative;
+
+        .icon {
+          height: 30px;
+          width: 30px;
+          background: whitesmoke;
+          @include flexCenter;
+          border-radius: 50%;
+          position: absolute;
+          left: 1px;
+          color: #444;
+        }
+
+        &:nth-child(2) {
+          background: $b-color;
+          color: whitesmoke;
+        }
+      }
+    }
+
+    .or__container {
+      padding: $gap 0;
+
+      .or__line {
+        height: 1px;
+        background: #27292f;
+        position: relative;
+
+        p {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          margin: auto;
+          height: 40px;
+          width: 40px;
+          border-radius: 50%;
+          background: var(--secondary-color);
+          @include flexCenter;
+        }
+      }
+    }
+
+    form {
+      @include flexDirection(column);
+      gap: $sm-gap;
+      .input__container {
+        width: 100%;
+        @include flexAlign;
+        gap: $sm-gap;
+
+        input {
+          flex: 1;
+          @include input;
+          border: var(--border);
+          color: var(--text-color);
+        }
+
+        select {
+          flex: 1;
+          @include input;
+          color: var(--text-color);
+          border: var(--border);
+          text-transform: capitalize;
+        }
+      }
+
+      button {
+        @include button;
+        background: var(--g-color);
+        border-radius: 20px;
+        color: whitesmoke;
+      }
+
+      p {
+        text-align: center;
+      }
+    }
+  }
+}

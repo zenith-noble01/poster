@@ -19,8 +19,6 @@ const NewPost = () => {
     setFile(base64);
   };
 
-  console.log(allow);
-
   return (
     <div className="app__newpost__container">
       {file ? (

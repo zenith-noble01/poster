@@ -2,7 +2,15 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { NewPost } from "./components";
-import { Home, Login, Messenger, Post, Recent, Register } from "./pages";
+import {
+  Home,
+  Login,
+  Messenger,
+  Post,
+  Recent,
+  Register,
+  SignUp,
+} from "./pages";
 import "./Styles/app.scss";
 
 const App = () => {
@@ -18,6 +26,7 @@ const App = () => {
         <Route path="/messages" element={<Messenger />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
 
       {poster && <NewPost />}
