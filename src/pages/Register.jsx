@@ -39,6 +39,8 @@ const Register = () => {
     // console.log(user);
   };
 
+  console.log(message);
+
   if (isError) {
     console.log(isError);
   }

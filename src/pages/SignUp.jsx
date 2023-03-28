@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import "../Styles/signup.scss";
 import { FaApple, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
+  const [userData, setUserData] = useState({
+    username: "",
+    handleName: "",
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setUserData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const { handleName, username, email, password } = userData;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="app__signup">
       <div className="signup__container">
@@ -24,16 +45,40 @@ const SignUp = () => {
             <p>OR</p>
           </div>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="input__container">
-            <input type="text" placeholder="Firt name" />
-            <input type="text" placeholder="Last name" />
+            <input
+              onChange={handleChange}
+              name="username"
+              type="text"
+              placeholder="Username"
+              value={username}
+            />
+            <input
+              onChange={handleChange}
+              name="handleName"
+              type="text"
+              placeholder="handle ex(@poster)"
+              value={handleName}
+            />
           </div>
           <div className="input__container">
-            <input type="email" placeholder="Email" />
+            <input
+              onChange={handleChange}
+              name="email"
+              value={email}
+              type="email"
+              placeholder="Email"
+            />
           </div>
           <div className="input__container">
-            <input type="password" placeholder="Password" />
+            <input
+              onChange={handleChange}
+              name="password"
+              value={password}
+              type="password"
+              placeholder="Password"
+            />
           </div>
           <div className="input__container">
             <select name="" id="">
