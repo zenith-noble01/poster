@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const [userData, setUserData] = useState({
-    username: "",
-    handleName: "",
     email: "",
     password: "",
   });
@@ -18,7 +16,7 @@ const SignUp = () => {
     }));
   };
 
-  const { handleName, username, email, password } = userData;
+  const { email, password } = userData;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,22 +46,6 @@ const SignUp = () => {
           <div className="input__container">
             <input
               onChange={handleChange}
-              name="username"
-              type="text"
-              placeholder="Username"
-              value={username}
-            />
-            <input
-              onChange={handleChange}
-              name="handleName"
-              type="text"
-              placeholder="handle ex(@poster)"
-              value={handleName}
-            />
-          </div>
-          <div className="input__container">
-            <input
-              onChange={handleChange}
               name="email"
               value={email}
               type="email"
@@ -79,17 +61,10 @@ const SignUp = () => {
               placeholder="Password"
             />
           </div>
-          <div className="input__container">
-            <select name="" id="">
-              <option value="">cameroon</option>
-              <option value="">nigeria</option>
-              <option value="">congo</option>
-            </select>
-          </div>
 
-          <button>Create my account</button>
+          <button>Login Now</button>
           <p>
-            Already have an account? <Link to="/signin">Login</Link>
+            Don't have an account? <Link to="/signup">Register</Link>
           </p>
         </form>
       </div>

@@ -11,7 +11,7 @@ const Post = ({ poster }) => {
       }}
     >
       <Link className="poster__img" to={`/poster/${poster.id}`}>
-        {/* <img src={poster.img} alt="" /> */}
+        {/* {<img src={poster.img} alt="" />} */}
       </Link>
     </div>
   );

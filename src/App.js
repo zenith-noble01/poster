@@ -2,15 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { NewPost } from "./components";
-import {
-  Home,
-  Login,
-  Messenger,
-  Post,
-  Recent,
-  Register,
-  SignUp,
-} from "./pages";
+import { Hero, Home, Messenger, Post, Recent, Signin, SignUp } from "./pages";
 import "./Styles/app.scss";
 
 const App = () => {
@@ -20,13 +12,15 @@ const App = () => {
   return (
     <div className="App" data-theme={theme}>
       <Routes>
-        <Route path="/" element={<Home />} />
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/" element={<Hero />} />
         <Route path="/poster/:id" element={<Post />} />
         <Route path="/recent" element={<Recent />} />
         <Route path="/messages" element={<Messenger />} />
-        <Route path="/Register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        {/*  <Route path="/Register" element={<Register />} />
+        <Route path="/login" element={<Login />} /> */}
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<Signin />} />
       </Routes>
 
       {poster && <NewPost />}
