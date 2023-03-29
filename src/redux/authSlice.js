@@ -26,11 +26,11 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-export const loginStudent = createAsyncThunk(
+export const logInUser = createAsyncThunk(
   "auth/login",
-  async (student, thunkAPI) => {
+  async (user, thunkAPI) => {
     try {
-      const { data } = await authServices.loginStudent(student);
+      const { data } = await authServices.logInUser(user);
 
       console.log(data);
     } catch (error) {
@@ -75,15 +75,15 @@ export const authSlice = createSlice({
         state.message = action.payload;
         state.student = null;
       })
-      .addCase(loginStudent.pending, (state) => {
+      .addCase(logInUser.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(loginStudent.fulfilled, (state, action) => {
+      .addCase(logInUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.student = action.payload;
       })
-      .addCase(loginStudent.rejected, (state, action) => {
+      .addCase(logInUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Styles/signup.scss";
 import { FaApple, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { registerUser } from "../Helper";
+import { toast, Toaster } from "react-hot-toast";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState({
     username: "",
     handleName: "",
@@ -20,12 +23,27 @@ const SignUp = () => {
 
   const { handleName, username, email, password } = userData;
 
-  const handleSubmit = (e) => {
+  useEffect(() => {}, []);
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    let registerPromise = registerUser(userData);
+    toast.promise(registerPromise, {
+      loading: "Creating...",
+      success: <b>Register Successfully...!</b>,
+      error: <b>Could not Login.</b>,
+    });
+
+    registerPromise.then(function () {
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    });
   };
 
   return (
     <div className="app__signup">
+      <Toaster position="top-center" />
       <div className="signup__container">
         <h1>Sign up to find work you love</h1>
         <div className="cta__btns">

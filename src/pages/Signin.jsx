@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import "../Styles/signup.scss";
 import { FaApple, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { apiRoute } from "../Constants";
+import { loginUser } from "../Helper";
+import toast, { Toaster } from "react-hot-toast";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -18,12 +23,26 @@ const SignUp = () => {
 
   const { email, password } = userData;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    let loginPromise = loginUser({ email, password });
+    toast.promise(loginPromise, {
+      loading: "Loging in...",
+      success: <b>Login Successfully...!</b>,
+      error: <b>Could not Register.</b>,
+    });
+
+    loginPromise.then(function () {
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    });
   };
 
   return (
     <div className="app__signup">
+      <Toaster position="top-center" />
       <div className="signup__container">
         <h1>Sign up to find work you love</h1>
         <div className="cta__btns">
