@@ -21,6 +21,9 @@ export async function loginUser({ email, password }) {
       email,
       password,
     });
+
+    localStorage.setItem("user", JSON.stringify(data));
+
     return Promise.resolve({ data });
   } catch (error) {
     return Promise.reject({ error: "Password doesn't Match...!" });

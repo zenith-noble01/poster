@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authServices from "./authservices";
 
-const student = JSON.parse(localStorage.getItem("student"));
+const user = JSON.parse(localStorage.getItem("user"));
 
 const initialState = {
-  student: student ? student : null,
+  user: user ? user : null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -13,9 +13,9 @@ const initialState = {
 
 export const registerUser = createAsyncThunk(
   "auth/register",
-  async (student, thunkAPI) => {
+  async (user, thunkAPI) => {
     try {
-      return await authServices.registerUser(student);
+      return await authServices.registerUser(user);
     } catch (error) {
       const message =
         (error.response && error.response.data && error.response.data.msg) ||
@@ -26,11 +26,11 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-export const logInUser = createAsyncThunk(
+export const loginInUser = createAsyncThunk(
   "auth/login",
   async (user, thunkAPI) => {
     try {
-      const { data } = await authServices.logInUser(user);
+      const { data } = await authServices.loginInUser(user);
 
       console.log(data);
     } catch (error) {
@@ -75,15 +75,15 @@ export const authSlice = createSlice({
         state.message = action.payload;
         state.student = null;
       })
-      .addCase(logInUser.pending, (state) => {
+      .addCase(loginInUser.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(logInUser.fulfilled, (state, action) => {
+      .addCase(loginInUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.student = action.payload;
       })
-      .addCase(logInUser.rejected, (state, action) => {
+      .addCase(loginInUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

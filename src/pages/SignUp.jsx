@@ -31,12 +31,12 @@ const SignUp = () => {
     toast.promise(registerPromise, {
       loading: "Creating...",
       success: <b>Register Successfully...!</b>,
-      error: <b>Could not Login.</b>,
+      error: <b>Could not Register user...!</b>,
     });
 
     registerPromise.then(function () {
       setTimeout(() => {
-        navigate("/");
+        navigate("/signin");
       }, 2000);
     });
   };

@@ -10,7 +10,7 @@ const Hero = () => {
           <h1>Poster</h1>
         </div>
         <div className="hero__cta">
-          <Link to="/signup">Login</Link>
+          <Link to="/signin">Login</Link>
         </div>
       </div>
       <div className="hero__container">
@@ -19,7 +19,7 @@ const Hero = () => {
           <span>and a better tomorrow.</span>
         </h2>
 
-        <Link to="/signup">Experience the Cleanliness</Link>
+        <Link to="/signin">Experience the Cleanliness</Link>
       </div>
     </div>
   );

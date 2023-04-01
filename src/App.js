@@ -1,24 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { NewPost } from "./components";
-import { Hero, Home, Messenger, Post, Recent, Signin, SignUp } from "./pages";
+import {
+  Hero,
+  Home,
+  Messenger,
+  NotFound,
+  Post,
+  Recent,
+  Signin,
+  SignUp,
+} from "./pages";
 import "./Styles/app.scss";
 
 const App = () => {
   const theme = useSelector((state) => state.theme);
   const poster = useSelector((state) => state.poster);
 
+  const user = useSelector((state) => state.auth.user);
+
   return (
     <div className="App" data-theme={theme}>
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/" element={<Hero />} />
+        <Route path="/" element={user ? <Home /> : <Hero />} />
         <Route path="/poster/:id" element={<Post />} />
         <Route path="/recent" element={<Recent />} />
         <Route path="/messages" element={<Messenger />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       {poster && <NewPost />}

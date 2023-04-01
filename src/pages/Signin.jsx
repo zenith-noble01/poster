@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import "../Styles/signup.scss";
 import { FaApple, FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { apiRoute } from "../Constants";
-import { loginUser } from "../Helper";
-import toast, { Toaster } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { loginInUser, reset } from "../redux/authSlice";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -21,23 +26,28 @@ const SignUp = () => {
     }));
   };
 
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess || user) {
+      setTimeout(() => {
+        toast.success("Login successful...!");
+        window.location.reload();
+        navigate("/");
+      }, 1500);
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
   const { email, password } = userData;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let loginPromise = loginUser({ email, password });
-    toast.promise(loginPromise, {
-      loading: "Loging in...",
-      success: <b>Login Successfully...!</b>,
-      error: <b>Could not Register.</b>,
-    });
-
-    loginPromise.then(function () {
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
-    });
+    dispatch(loginInUser(userData));
   };
 
   return (
