@@ -79,6 +79,7 @@
           width: 100%;
           padding: $sm-gap;
           border-top: var(--border);
+          background: var(--primary-color);
 
           img {
             @include userProfile;

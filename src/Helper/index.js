@@ -1,6 +1,13 @@
 import axios from "axios";
 import { apiRoute } from "../Constants";
 import jwt_decode from "jwt-decode";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setSearchQuery,
+  setSearchResults,
+  setSearchLoading,
+  setSearchError,
+} from "../redux/search";
 
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
@@ -56,3 +63,37 @@ export async function createPost(credentials) {
     return Promise.reject({ error });
   }
 }
+
+export const useSearch = () => {
+  const query = useSelector((state) => state.search?.query);
+  const results = useSelector((state) => state.search?.results);
+  const isLoading = useSelector((state) => state.search?.isLoading);
+  const error = useSelector((state) => state.search?.error);
+  const dispatch = useDispatch();
+
+  const search = async (query) => {
+    try {
+      dispatch(setSearchLoading(true));
+      const response = await fetch(`/api/search?q=${query}`);
+      const data = await response.json();
+      dispatch(setSearchResults(data.results));
+    } catch (error) {
+      dispatch(setSearchError(error.message));
+    } finally {
+      dispatch(setSearchLoading(false));
+    }
+  };
+
+  const handleSearch = (event) => {
+    dispatch(setSearchQuery(event.target.value));
+    search(event.target.value);
+  };
+
+  return {
+    query,
+    results,
+    isLoading,
+    error,
+    handleSearch,
+  };
+};

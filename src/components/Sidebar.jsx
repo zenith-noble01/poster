@@ -38,6 +38,7 @@ const Sidebar = () => {
           </NavLink>
         ))}
       </ul>
+
       <div className="theme__container">
         <div className={`theme ${theme}`} onClick={handleChangeTheme}>
           <div className="icon">
