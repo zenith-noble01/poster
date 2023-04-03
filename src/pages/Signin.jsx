@@ -1,18 +1,17 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import "../Styles/signup.scss";
 import { FaApple, FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
-import { loginInUser, reset } from "../redux/authSlice";
+// import { useDispatch, useSelector } from "react-redux";
+// import { loginInUser, reset } from "../redux/authSlice";
+import { loginUser } from "../Helper";
+import { useSelector } from "react-redux";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  );
+  const user = useSelector((state) => state.auth.user);
 
   const [userData, setUserData] = useState({
     email: "",
@@ -27,27 +26,30 @@ const SignUp = () => {
   };
 
   useEffect(() => {
-    if (isError) {
-      toast.error(message);
+    if (user) {
+      navigate("/");
     }
-
-    if (isSuccess || user) {
-      setTimeout(() => {
-        toast.success("Login successful...!");
-        window.location.reload();
-        navigate("/");
-      }, 1500);
-    }
-
-    dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+  }, [user, navigate]);
 
   const { email, password } = userData;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    dispatch(loginInUser(userData));
+    let loginPromise = loginUser(userData);
+
+    toast.promise(loginPromise, {
+      loading: "Checking info...",
+      success: <b>Login Successfully...!</b>,
+      error: <b>Could not Login user...!</b>,
+    });
+
+    loginPromise.then(function () {
+      setTimeout(() => {
+        window.location.reload();
+        navigate("/");
+      }, 2000);
+    });
   };
 
   return (

@@ -4,9 +4,13 @@ import { FaApple, FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../Helper";
 import { toast, Toaster } from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const SignUp = () => {
   const navigate = useNavigate();
+
+  const user = useSelector((state) => state.auth.user);
+
   const [userData, setUserData] = useState({
     username: "",
     handleName: "",
@@ -40,6 +44,12 @@ const SignUp = () => {
       }, 2000);
     });
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   return (
     <div className="app__signup">

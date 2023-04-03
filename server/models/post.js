@@ -21,6 +21,10 @@ const postModel = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  tags: {
+    type: Array,
+    default: [],
+  },
 });
 
 const Post = mongoose.model("post", postModel);

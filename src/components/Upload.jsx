@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { FaPlus } from "react-icons/fa";
 import { tags } from "../Constants";
+import { getuser } from "../Helper";
 
 const Upload = ({ file, setFile, setAllow, allow }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [tagged, setTagged] = useState([]);
   const [active, setActive] = useState(false);
+
+  const user = getuser();
 
   const newTags = tags.filter((tag) =>
     tag.name.toLowerCase().includes(searchTerm)
@@ -35,12 +38,16 @@ const Upload = ({ file, setFile, setAllow, allow }) => {
     }
   }, [searchTerm]);
 
+  const handlePublish = async () => {
+    const post = {};
+  };
+
   return (
     <div className="file__uploadContainer">
       <Toaster position="top-center" reverseOrder={false} />
       <div className="uploader__header">
         <p onClick={() => setFile(null)}>Back</p>
-        <button>Publish</button>
+        <button onClick={handlePublish}>Publish</button>
       </div>
 
       <div className="uploader__container">

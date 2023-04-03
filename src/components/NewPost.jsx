@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { poster } from "../redux/poster";
 import "../Styles/newPost.scss";
 import { Upload, UploadSelection } from "./";
-import { covertImageToBase64 } from "../helper";
+import { covertImageToBase64 } from "../Helper";
 
 const NewPost = () => {
   const [file, setFile] = useState(null);
