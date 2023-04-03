@@ -6,7 +6,7 @@ import { apiRoute, sidebarRoutes } from "../Constants";
 import { Link, NavLink } from "react-router-dom";
 import { BiMoon, BiSun } from "react-icons/bi";
 import { getUser } from "../Helper";
-import { user as profile } from "../Images";
+import { noAvatar } from "../Images";
 import axios from "axios";
 
 const Sidebar = () => {
@@ -45,7 +45,7 @@ const Sidebar = () => {
           </div>
         </div>
         <Link to="/profile/222" className="user__container">
-          <img src={user?.profile ? user?.profile : profile} alt="" />
+          <img src={user?.profile ? user?.profile : noAvatar} alt="" />
           <p>
             {user?.username} <span>{user?.email}</span>
           </p>

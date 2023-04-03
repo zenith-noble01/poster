@@ -134,3 +134,114 @@ export async function resetPassword({ username, password }) {
     return Promise.reject({ error });
   }
 }
+
+// To create a search hook with Redux, you can follow these steps:
+
+// Create a new Redux slice for search state using
+// createSlice
+//  from
+// @reduxjs/toolkit
+// .
+// import { createSlice } from "@reduxjs/toolkit";
+
+// const searchSlice = createSlice({
+//   name: "search",
+//   initialState: {
+//     query: "",
+//     results: [],
+//     isLoading: false,
+//     error: null,
+//   },
+//   reducers: {
+//     setSearchQuery: (state, action) => {
+//       state.query = action.payload;
+//     },
+//     setSearchResults: (state, action) => {
+//       state.results = action.payload;
+//     },
+//     setSearchLoading: (state, action) => {
+//       state.isLoading = action.payload;
+//     },
+//     setSearchError: (state, action) => {
+//       state.error = action.payload;
+//     },
+//   },
+// });
+
+// export const {
+//   setSearchQuery,
+//   setSearchResults,
+//   setSearchLoading,
+//   setSearchError,
+// } = searchSlice.actions;
+
+// export default searchSlice.reducer;
+// Create a custom hook that uses
+// useSelector
+//  and
+// useDispatch
+//  hooks from
+// react-redux
+//  to access and update the search state.
+// import { useSelector, useDispatch } from "react-redux";
+// import {
+//   setSearchQuery,
+//   setSearchResults,
+//   setSearchLoading,
+//   setSearchError,
+// } from "./searchSlice";
+
+// export const useSearch = () => {
+//   const query = useSelector((state) => state.search.query);
+//   const results = useSelector((state) => state.search.results);
+//   const isLoading = useSelector((state) => state.search.isLoading);
+//   const error = useSelector((state) => state.search.error);
+//   const dispatch = useDispatch();
+
+//   const search = async (query) => {
+//     try {
+//       dispatch(setSearchLoading(true));
+//       const response = await fetch(`/api/search?q=${query}`);
+//       const data = await response.json();
+//       dispatch(setSearchResults(data.results));
+//     } catch (error) {
+//       dispatch(setSearchError(error.message));
+//     } finally {
+//       dispatch(setSearchLoading(false));
+//     }
+//   };
+
+//   const handleSearch = (event) => {
+//     dispatch(setSearchQuery(event.target.value));
+//     search(event.target.value);
+//   };
+
+//   return {
+//     query,
+//     results,
+//     isLoading,
+//     error,
+//     handleSearch,
+//   };
+// };
+// Use the custom hook in your component to access and update the search state.
+// import { useSearch } from "./useSearch";
+
+// const Search = () => {
+//   const { query, results, isLoading, error, handleSearch } = useSearch();
+
+//   return (
+//     <div>
+//       <input type="text" value={query} onChange={handleSearch} />
+//       {isLoading && <p>Loading...</p>}
+//       {error && <p>{error}</p>}
+//       {results.map((result) => (
+//         <div key={result.id}>
+//           <h2>{result.title}</h2>
+//           <p>{result.description}</p>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// };
+// This is just a basic example of how to create a search hook with Redux. You can customize it to fit your specific needs.

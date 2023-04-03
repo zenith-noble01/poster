@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Post = ({ poster }) => {
+  console.log(poster);
   return (
     <div
       className="post__container"
@@ -9,8 +10,8 @@ const Post = ({ poster }) => {
         height: poster.height,
       }}
     >
-      <Link className="poster__img" to={`/poster/${poster.id}`}>
-        {/* {<img src={poster.img} alt="" />} */}
+      <Link className="poster__img" to={`/poster/${poster?._id}`}>
+        {<img src={poster?.postImg} alt="" />}
       </Link>
     </div>
   );

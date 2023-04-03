@@ -1,17 +1,32 @@
 import "../Styles/post.scss";
 import { Sidebar, Navbar } from "../components";
-import { user } from "../Images";
+import { noAvatar } from "../Images";
 import { BiDotsHorizontalRounded, BiSmile } from "react-icons/bi";
-import { posters } from "../Constants";
+import { apiRoute } from "../Constants";
 import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 const Post = () => {
   const location = useLocation();
 
+  const [post, setPost] = useState({});
+  const [user, setUser] = useState({});
+
   const pathname = location.pathname.split("/")[2];
 
-  const post = posters.find((poster) => poster.id.toString() === pathname);
+  useEffect(() => {
+    const getAPost = async () => {
+      const { data } = await axios.get(`${apiRoute}/post/${pathname}`);
+      setPost(data);
+      const response = await axios.get(`${apiRoute}/auth/u/${post.userId}`);
 
-  console.log(post);
+      setUser(response.data);
+    };
+
+    getAPost();
+  }, [pathname, post.userId]);
+
+  console.log(user);
   return (
     <div className="app__post">
       <Sidebar />
@@ -19,40 +34,22 @@ const Post = () => {
         <Navbar title="Poster" />
         <div className="poster__container">
           <div className="left__poster">
-            <img src={post.img} alt="" />
+            <img src={post?.postImg} alt="" />
           </div>
           <div className="right__poster">
             <div className="poster__header">
               <div className="user">
-                <img src={post.user} alt="" />
-                <p>Zenith noble</p>
+                <img src={user?.profile ? user?.profile : noAvatar} alt="" />
+                <p>{user?.username}</p>
               </div>
               <Link to="/messages">Message</Link>
               <BiDotsHorizontalRounded />
             </div>
             <div className="poster__desc">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea
-                delectus fugiat soluta deleniti qui neque quae est totam odio
-                provident laborum, pariatur quia. Suscipit numquam nulla in
-                soluta saepe voluptatibus? Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Ea delectus fugiat soluta deleniti
-                qui neque quae est totam odio provident laborum, pariatur quia.
-                Suscipit numquam nulla in soluta saepe voluptatibus? Lorem ipsum
-                dolor sit amet consectetur adipisicing elit. Ea delectus fugiat
-                soluta deleniti qui neque quae est totam odio provident laborum,
-                pariatur quia. Suscipit numquam nulla in soluta saepe
-                voluptatibus? Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. Ea delectus fugiat soluta deleniti qui neque quae est
-                totam odio provident laborum, pariatur quia. Suscipit numquam
-                nulla in soluta saepe voluptatibus? Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Ea delectus fugiat soluta deleniti
-                qui neque quae est totam odio provident laborum, pariatur quia.
-                Suscipit numquam nulla in soluta saepe voluptatibus?
-              </p>
+              <p>{post?.description}</p>
             </div>
             <div className="poster__comment">
-              <img src={user} alt="" />
+              <img src={user?.profile ? user?.profile : noAvatar} alt="" />
               <div className="input__container">
                 <input type="text" placeholder="Add a comment" />
                 <BiSmile />

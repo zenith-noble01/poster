@@ -17,6 +17,7 @@ import img15 from "./img15.jpg";
 import img16 from "./img16.jpg";
 import cover from "./cover.png";
 import notFound from "./404.png";
+import noAvatar from "./noAvatar.png";
 
 export {
   user,
@@ -38,4 +39,5 @@ export {
   img14,
   img15,
   img16,
+  noAvatar,
 };
