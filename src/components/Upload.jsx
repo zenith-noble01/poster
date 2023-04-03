@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { FaPlus } from "react-icons/fa";
 import { tags } from "../Constants";
-import { getuser } from "../Helper";
+import { createPost, getUser } from "../Helper";
 
 const Upload = ({ file, setFile, setAllow, allow }) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [postData, setPostData] = useState({
+    title: "",
+    description: "",
+  });
   const [tagged, setTagged] = useState([]);
   const [active, setActive] = useState(false);
-
-  const user = getuser();
 
   const newTags = tags.filter((tag) =>
     tag.name.toLowerCase().includes(searchTerm)
@@ -23,6 +25,15 @@ const Upload = ({ file, setFile, setAllow, allow }) => {
       setTagged([...tagged, tag]);
       setSearchTerm("");
     }
+  };
+
+  const { title, description } = postData;
+
+  const handleOnchange = (e) => {
+    setPostData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleDeleteTag = (tag) => {
@@ -39,7 +50,35 @@ const Upload = ({ file, setFile, setAllow, allow }) => {
   }, [searchTerm]);
 
   const handlePublish = async () => {
-    const post = {};
+    try {
+      const { userId } = await getUser();
+      const post = {
+        userId,
+        title,
+        description,
+        isAllowed: allow,
+        postImg: file,
+        tags: tagged,
+      };
+
+      console.log(post);
+
+      let postPromise = createPost(post);
+
+      toast.promise(postPromise, {
+        loading: "Publishing post...",
+        success: <b>Post published successfully!</b>,
+        error: <b>Failed to publish post. </b>,
+      });
+
+      postPromise.then(function () {
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      });
+    } catch (error) {
+      toast.error("Could not make a post");
+    }
   };
 
   return (
@@ -60,11 +99,22 @@ const Upload = ({ file, setFile, setAllow, allow }) => {
           <form>
             <div className="input__container">
               <label>Idea poster title</label>
-              <input type="text" placeholder="Add title" />
+              <input
+                type="text"
+                value={title}
+                name="title"
+                onChange={handleOnchange}
+                placeholder="Add title"
+              />
             </div>
             <div className="input__container">
               <label>Description</label>
-              <textarea placeholder="Add a description" />
+              <textarea
+                value={description}
+                name="description"
+                onChange={handleOnchange}
+                placeholder="Add a description"
+              />
             </div>
             <div className="input__container">
               <label>Tagged topics ({})</label>

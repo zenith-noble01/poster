@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../Styles/sidebar.scss";
 import { toogleTheme } from "../redux/theme";
-import { sidebarRoutes } from "../Constants";
+import { apiRoute, sidebarRoutes } from "../Constants";
 import { Link, NavLink } from "react-router-dom";
 import { BiMoon, BiSun } from "react-icons/bi";
-import { user } from "../Images";
+import { getUser } from "../Helper";
+import { user as profile } from "../Images";
+import axios from "axios";
 
 const Sidebar = () => {
   const theme = useSelector((state) => state.theme);
+  const [user, setUser] = useState({});
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getUserDetails = async () => {
+      const { userId } = await getUser();
+      const { data } = await axios.get(`${apiRoute}/auth/u/${userId}`);
+      setUser(data);
+    };
+    getUserDetails();
+  }, []);
 
   const handleChangeTheme = () => {
     dispatch(toogleTheme());
@@ -33,9 +45,9 @@ const Sidebar = () => {
           </div>
         </div>
         <Link to="/profile/222" className="user__container">
-          <img src={user} alt="" />
+          <img src={user?.profile ? user?.profile : profile} alt="" />
           <p>
-            Wilfried Fossele <span>fossele@gmail.com</span>
+            {user?.username} <span>{user?.email}</span>
           </p>
         </Link>
       </div>

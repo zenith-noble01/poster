@@ -4,47 +4,36 @@ import User from "../models/user.js";
 
 const createPost = async (req, res) => {
   try {
-    const { userId, postImg, description, title, isAllowed } = req.body;
+    const { userId, postImg, description, title, isAllowed, tags } = req.body;
 
-    if (!Image) {
-      return res.status(400).send({ msg: "image is required" });
+    if (!postImg || !description || !title || !isAllowed) {
+      return res.status(400).send({ msg: "Checkout your fields..." });
     }
 
-    User.findById(userId)
-      .then((user) => {
-        cloudinary.uploader
-          .upload(postImg)
-          .then((uploadedImage) => {
-            const imageUrl = uploadedImage.secure_url;
-            Post.create({
-              userId: user._id,
-              description,
-              postImg: imageUrl,
-              title,
-              isAllowed: isAllowed,
-            })
-              .then((post) => {
-                res.status(200).send({
-                  msg: "Post successfully created",
-                  post,
-                });
-              })
-              .catch((error) => {
-                return res.status(500).send({ msg: error.message });
-              });
-          })
-          .catch((error) => {
-            return res.status(400).send({ msg: "something happend" });
-          });
-      })
-      .catch((err) => {
-        return res.status(404).send({ msg: "User not found" });
-      });
+    const user = await User.findById(userId);
+    const uploadedImage = await cloudinary.uploader.upload(postImg);
+    const imageUrl = uploadedImage.secure_url;
+
+    const post = await Post.create({
+      userId: user._id,
+      description,
+      postImg: imageUrl,
+      title,
+      isAllowed: isAllowed,
+      tags: tags,
+    });
+
+    res.status(200).send({
+      msg: "Post successfully created",
+      post,
+    });
   } catch (error) {
+    if (error.message === "User not found") {
+      return res.status(404).send({ msg: error.message });
+    }
     return res.status(500).send({ msg: error.message });
   }
 };
-
 const updatePost = async (req, res) => {
   const { postId } = req.params;
   const { userId } = req.user;

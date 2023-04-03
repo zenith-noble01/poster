@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import conversationRoute from "./routes/conversationRoute.js";
 import userRoute from "./routes/userRoute.js";
 import postRoute from "./routes/postRoute.js";
+import bodyParser from "body-parser";
 
 dotenv.config();
 
@@ -20,6 +21,8 @@ app.use(
 
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(bodyParser.json({ limit: "1000mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 // routes
 app.use("/api/conversation", conversationRoute);

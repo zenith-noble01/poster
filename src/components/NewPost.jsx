@@ -15,7 +15,8 @@ const NewPost = () => {
   };
 
   const upload = async (e) => {
-    const base64 = await covertImageToBase64(e.target.files[0]);
+    const file = e.target.files[0];
+    const base64 = await covertImageToBase64(file);
     setFile(base64);
   };
 
