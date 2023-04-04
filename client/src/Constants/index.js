@@ -225,7 +225,8 @@ export const comments = [
   },
 ];
 
-export const apiRoute = "http://localhost:5000/api";
+export const serverRoute = "http://localhost:5000/api";
+export const apiRoute = "https://poster-xg3x.onrender.com/api";
 
 export const tags = [
   {
@@ -253,6 +254,9 @@ export const tags = [
     id: 4398483893,
   },
 ];
+
+
+
 
 export const conversations = [
   {

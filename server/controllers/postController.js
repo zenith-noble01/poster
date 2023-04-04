@@ -156,11 +156,30 @@ const getUserPost = async (req, res) => {
           return res.status(200).send(post);
         });
       })
+
       .catch((err) => {
         return res.status(404).send({ msg: "user not found" });
       });
   } catch (error) {
     res.status(404).send({ msg: "....." });
+  }
+};
+const searchPost = async (req, res) => {
+  try {
+    const { q } = req.query;
+    const posts = await Post.find();
+    const results = q
+      ? posts.filter((item) => {
+          return item.tags.some((inc) => {
+            return inc.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+          });
+        })
+      : posts;
+
+    res.json(results);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -171,4 +190,5 @@ export {
   likePost,
   deletePost,
   updatePost,
+  searchPost,
 };

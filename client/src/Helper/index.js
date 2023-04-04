@@ -74,9 +74,18 @@ export const useSearch = () => {
   const search = async (query) => {
     try {
       dispatch(setSearchLoading(true));
-      const response = await fetch(`/api/search?q=${query}`);
-      const data = await response.json();
-      dispatch(setSearchResults(data.results));
+
+      if (query.length > 2) {
+        const { data } = await axios.get(
+          `${apiRoute}/post/all/search?q=${query}`
+        );
+
+        dispatch(setSearchResults(data));
+      } else {
+        const { data } = await axios.get(`${apiRoute}/post/all/search`);
+        console.log(data);
+        dispatch(setSearchResults(data));
+      }
     } catch (error) {
       dispatch(setSearchError(error.message));
     } finally {

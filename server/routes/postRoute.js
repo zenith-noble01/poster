@@ -10,6 +10,7 @@ router.delete("/:postId", post.deletePost);
 router.get("/all", post.getAllPost);
 router.get("/:postId", post.getAPost);
 router.get("/profile/:username", post.getUserPost);
+router.get("/all/search", post.searchPost);
 
 router.put("/:postId/like", post.likePost);
 
