@@ -4,15 +4,22 @@
 git clone poster https://github.com/zenith-noble01/poster.git
 ```
 
-# Installing all depencies
+# changing the directory to client
 
-
+```bash
+cd client 
+```
+# install the packages in the client directory
 ```bash
 npm install 
 ```
-OR
 
+# changing the directory to server
 
 ```bash
-npm i
+cd server 
+```
+# install the packages in the server directory
+```bash
+npm install 
 ```
