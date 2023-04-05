@@ -69,6 +69,36 @@
 
         .poster__desc {
           padding: $sm-gap;
+          overflow-y: auto;
+          height: 58vh;
+
+          @include flexDirection(column);
+
+          gap: $sm-gap;
+
+          p {
+            @include flexAlign;
+            gap: 0.5rem;
+
+            img {
+              @include postProfile;
+            }
+          }
+
+          .post__comments {
+            @include flexDirection(column);
+
+            gap: $sm-gap;
+
+            li {
+              @include flexAlign;
+              gap: 0.5rem;
+
+              img {
+                @include postProfile;
+              }
+            }
+          }
         }
 
         .poster__comment {
@@ -97,6 +127,13 @@
               flex: 1;
               color: var(--text-color);
             }
+          }
+
+          button {
+            @include button;
+            color: whitesmoke;
+            background: var(--g-color);
+            border-radius: 8px;
           }
         }
       }

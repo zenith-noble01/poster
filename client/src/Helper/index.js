@@ -106,3 +106,15 @@ export const useSearch = () => {
     handleSearch,
   };
 };
+
+export async function comomentPost(credentials) {
+  try {
+    const { postId } = credentials;
+    const {
+      data: { msg },
+    } = await axios.post(`${apiRoute}/comment/${postId}`, credentials);
+    return Promise.resolve(msg);
+  } catch (error) {
+    return Promise.reject({ error });
+  }
+}

@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import conversationRoute from "./routes/conversationRoute.js";
 import userRoute from "./routes/userRoute.js";
 import postRoute from "./routes/postRoute.js";
+import commentRoute from "./routes/commentRoute.js";
 import bodyParser from "body-parser";
 
 dotenv.config();
@@ -28,6 +29,7 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use("/api/conversation", conversationRoute);
 app.use("/api/auth", userRoute);
 app.use("/api/post", postRoute);
+app.use("/api/comment", commentRoute);
 
 connectDb();
 

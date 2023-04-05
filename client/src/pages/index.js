@@ -6,5 +6,16 @@ import SignUp from "./SignUp";
 import Signin from "./Signin";
 import Hero from "./Hero";
 import NotFound from "./NotFound";
+import Profile from "./Profile";
 
-export { Home, Recent, Post, Messenger, SignUp, Hero, Signin, NotFound };
+export {
+  Home,
+  Recent,
+  Post,
+  Messenger,
+  SignUp,
+  Hero,
+  Signin,
+  NotFound,
+  Profile,
+};

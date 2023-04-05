@@ -29,6 +29,7 @@ const App = () => {
         <Route path="/messages" element={user ? <Messenger /> : <Signin />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="/profile/:id" element={<Signin />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
 

@@ -3,8 +3,6 @@
   align-items: center;
 }
 
-
-
 @mixin flexDirection($direction) {
   display: flex;
   flex-direction: $direction;
@@ -27,6 +25,13 @@
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
+}
+@mixin postProfile {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
 }
 
 @mixin input {

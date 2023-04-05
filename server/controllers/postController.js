@@ -1,6 +1,7 @@
 import cloudinary from "../config/cloudinary.js";
 import Post from "../models/post.js";
 import User from "../models/user.js";
+import Comment from "../models/comment.js";
 
 const createPost = async (req, res) => {
   try {
