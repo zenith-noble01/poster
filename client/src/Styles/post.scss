@@ -87,7 +87,7 @@
           gap: $sm-gap;
 
           p {
-            @include flexAlign;
+            display: flex;
             gap: 0.5rem;
 
             img {

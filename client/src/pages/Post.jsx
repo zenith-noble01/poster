@@ -13,10 +13,10 @@ const Post = () => {
   const [text, setText] = useState("");
   const [comments, setComments] = useState([]);
   const [postNotFound, setPostNotFound] = useState(false);
-  const scrollRef = useRef();
   const [post, setPost] = useState({});
   const [user, setUser] = useState({});
   const [commentUser, setCommentUser] = useState({});
+  const scrollRef = useRef();
 
   const pathname = location.pathname.split("/")[2];
 
@@ -30,8 +30,8 @@ const Post = () => {
         );
         setUser(response);
       } catch (error) {
-        if (error.response.status) {
-          setPostNotFound(true);
+        if (error.response && error.response.status === 404) {
+          return setPostNotFound(true);
         }
       }
     };
@@ -39,23 +39,30 @@ const Post = () => {
     getAPost();
   }, [pathname, post.userId]);
 
-  console.log(post);
+  console.log(postNotFound, post);
+
   useEffect(() => {
     const getComment = async () => {
-      const {
-        data: { comments },
-      } = await axios.get(`${apiRoute}/comment/p/${pathname}`);
+      try {
+        const {
+          data: { comments },
+        } = await axios.get(`${apiRoute}/comment/p/${pathname}`);
 
-      const userIds = comments.map((comment) => comment.userId).filter(Boolean);
+        const userIds = comments
+          .map((comment) => comment.userId)
+          .filter(Boolean);
 
-      await Promise.all(
-        userIds.map(async (userId) => {
-          const { data } = await axios.get(`${apiRoute}/auth/u/${userId}`);
-          setCommentUser(data);
-        })
-      );
+        await Promise.all(
+          userIds.map(async (userId) => {
+            const { data } = await axios.get(`${apiRoute}/auth/u/${userId}`);
+            setCommentUser(data);
+          })
+        );
 
-      setComments(comments);
+        setComments(comments);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     getComment();
