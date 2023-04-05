@@ -5,6 +5,16 @@
   @include flexDirection(row);
   width: 100%;
 
+  .notFound__container {
+    @include flexDirection(column);
+    // gap: $gap;
+    width: 75%;
+    @include flexCenter;
+    img {
+      width: 80%;
+    }
+  }
+
   .post__container {
     @include flexDirection(column);
     gap: $gap;

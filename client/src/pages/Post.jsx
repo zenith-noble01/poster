@@ -1,6 +1,6 @@
 import "../Styles/post.scss";
 import { Sidebar, Navbar } from "../components";
-import { noAvatar } from "../Images";
+import { noAvatar, notFound } from "../Images";
 import { BiDotsHorizontalRounded, BiSmile } from "react-icons/bi";
 import { apiRoute } from "../Constants";
 import { Link, useLocation } from "react-router-dom";
@@ -12,6 +12,7 @@ const Post = () => {
   const location = useLocation();
   const [text, setText] = useState("");
   const [comments, setComments] = useState([]);
+  const [postNotFound, setPostNotFound] = useState(false);
   const scrollRef = useRef();
   const [post, setPost] = useState({});
   const [user, setUser] = useState({});
@@ -21,17 +22,24 @@ const Post = () => {
 
   useEffect(() => {
     const getAPost = async () => {
-      const { data } = await axios.get(`${apiRoute}/post/${pathname}`);
-      setPost(data);
-      const { data: response } = await axios.get(
-        `${apiRoute}/auth/u/${post?.userId}`
-      );
-      setUser(response);
+      try {
+        const { data } = await axios.get(`${apiRoute}/post/${pathname}`);
+        setPost(data);
+        const { data: response } = await axios.get(
+          `${apiRoute}/auth/u/${post?.userId}`
+        );
+        setUser(response);
+      } catch (error) {
+        if (error.response.status) {
+          setPostNotFound(true);
+        }
+      }
     };
 
     getAPost();
   }, [pathname, post.userId]);
 
+  console.log(post);
   useEffect(() => {
     const getComment = async () => {
       const {
@@ -83,63 +91,83 @@ const Post = () => {
   }, [comments]);
 
   return (
-    <div className="app__post">
-      <Toaster position="top-center" />
-      <Sidebar />
-      <div className="post__container outlet">
-        <Navbar title="Poster" />
-        <div className="poster__container">
-          <div className="left__poster">
-            <img src={post?.postImg} alt="" />
-          </div>
-          <div className="right__poster">
-            <div className="poster__header">
-              <div className="user">
-                <img src={user?.profile ? user?.profile : noAvatar} alt="" />
-                <p>{user?.username}</p>
-              </div>
-              <Link to="/messages">Message</Link>
-              <BiDotsHorizontalRounded />
-            </div>
-            <div className="poster__desc">
-              <p>
-                <img src={user?.profile ? user?.profile : noAvatar} alt="" />
-
-                <span>{user?.username}</span>
-                <b> {post?.description}</b>
-              </p>
-
-              <ul className="post__comments" ref={scrollRef}>
-                {comments?.map((comment, index) => (
-                  <li key={comment?._id || index}>
-                    <Link to={`/profile/${commentUser?._id}`}>
-                      <img
-                        src={commentUser?.profile ? user?.profile : noAvatar}
-                        alt=""
-                      />
-                    </Link>
-                    <span>{comment?.text}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <form className="poster__comment" onSubmit={handlSubmit}>
-              <img src={user?.profile ? user?.profile : noAvatar} alt="" />
-              <div className="input__container">
-                <input
-                  type="text"
-                  placeholder="Add a comment "
-                  onChange={(e) => setText(e.target.value)}
-                  value={text}
-                />
-                <BiSmile />
-              </div>
-              <button>Post</button>
-            </form>
+    <>
+      {postNotFound ? (
+        <div className="app__post">
+          <Sidebar />
+          <div className="notFound__container">
+            <img src={notFound} alt="" />
+            <h1>Post not found</h1>
           </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <div className="app__post">
+          <Toaster position="top-center" />
+          <Sidebar />
+          <div className="post__container outlet">
+            <Navbar title="Poster" />
+            <div className="poster__container">
+              <div className="left__poster">
+                <img src={post?.postImg} alt="" />
+              </div>
+              <div className="right__poster">
+                <div className="poster__header">
+                  <div className="user">
+                    <img
+                      src={user?.profile ? user?.profile : noAvatar}
+                      alt=""
+                    />
+                    <p>{user?.username}</p>
+                  </div>
+                  <Link to="/messages">Message</Link>
+                  <BiDotsHorizontalRounded />
+                </div>
+                <div className="poster__desc">
+                  <p>
+                    <img
+                      src={user?.profile ? user?.profile : noAvatar}
+                      alt=""
+                    />
+
+                    <span>{user?.username}</span>
+                    <b> {post?.description}</b>
+                  </p>
+
+                  <ul className="post__comments" ref={scrollRef}>
+                    {comments?.map((comment, index) => (
+                      <li key={comment?._id || index}>
+                        <Link to={`/profile/${commentUser?._id}`}>
+                          <img
+                            src={
+                              commentUser?.profile ? user?.profile : noAvatar
+                            }
+                            alt=""
+                          />
+                        </Link>
+                        <span>{comment?.text}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <form className="poster__comment" onSubmit={handlSubmit}>
+                  <img src={user?.profile ? user?.profile : noAvatar} alt="" />
+                  <div className="input__container">
+                    <input
+                      type="text"
+                      placeholder="Add a comment "
+                      onChange={(e) => setText(e.target.value)}
+                      value={text}
+                    />
+                    <BiSmile />
+                  </div>
+                  <button>Post</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

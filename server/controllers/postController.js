@@ -78,14 +78,14 @@ const getAllPost = async (req, res) => {
 export async function getAPost(req, res) {
   try {
     const { postId } = req.params;
-    Post.findById(postId)
-      .then((post) => {
-        res.status(200).send(post);
-      })
-      .catch((error) => {
-        res.status(404).send({ msg: "Post not found..." });
-      });
-  } catch (error) {}
+    const post = await Post.findById(postId);
+    if (!post) {
+      return res.status(404).send({ msg: "Post not found..." });
+    }
+    res.status(200).send(post);
+  } catch (error) {
+    res.status(500).send({ msg: error.message });
+  }
 }
 
 const deletePost = async (req, res) => {
