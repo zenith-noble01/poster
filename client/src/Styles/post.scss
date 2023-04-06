@@ -145,6 +145,17 @@
             background: var(--g-color);
             border-radius: 8px;
           }
+
+          .layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(12, 12, 12, 0.369);
+            color: whitesmoke;
+            @include flexCenter;
+          }
         }
       }
     }

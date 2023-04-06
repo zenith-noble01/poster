@@ -115,6 +115,6 @@ export async function comomentPost(credentials) {
     } = await axios.post(`${apiRoute}/comment/${postId}`, credentials);
     return Promise.resolve(msg);
   } catch (error) {
-    return Promise.reject({ error });
+    console.log(error);
   }
 }

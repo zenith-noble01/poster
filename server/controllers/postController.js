@@ -7,7 +7,7 @@ const createPost = async (req, res) => {
   try {
     const { userId, postImg, description, title, isAllowed, tags } = req.body;
 
-    if (!postImg || !description || !title || !isAllowed) {
+    if (!postImg || !description || !title) {
       return res.status(400).send({ msg: "Checkout your fields..." });
     }
 

@@ -11,6 +11,7 @@ import { toast, Toaster } from "react-hot-toast";
 const Post = () => {
   const location = useLocation();
   const [text, setText] = useState("");
+  const [availableUser, setAvailableUser] = useState({});
   const [comments, setComments] = useState([]);
   const [postNotFound, setPostNotFound] = useState(false);
   const [post, setPost] = useState({});
@@ -39,7 +40,19 @@ const Post = () => {
     getAPost();
   }, [pathname, post.userId]);
 
-  console.log(postNotFound, post);
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const user = await getUser();
+
+        setAvailableUser(user);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getUserData();
+  }, []);
 
   useEffect(() => {
     const getComment = async () => {
@@ -71,31 +84,37 @@ const Post = () => {
   const handlSubmit = async (e) => {
     e.preventDefault();
 
-    const { userId } = await getUser();
+    if (post.isAllowed) {
+      const { userId } = await getUser();
 
-    const credentials = {
-      userId,
-      postId: pathname,
-      text,
-    };
+      const credentials = {
+        userId,
+        postId: pathname,
+        text,
+      };
 
-    let commentPromise = comomentPost(credentials);
+      let commentPromise = comomentPost(credentials);
 
-    toast.promise(commentPromise, {
-      loading: "Commenting on post",
-      success: <b>Commented!</b>,
-      error: <b>Could not Comment...!</b>,
-    });
+      toast.promise(commentPromise, {
+        loading: "Commenting on post",
+        success: <b>Commented!</b>,
+        error: <b>Could not Comment...!</b>,
+      });
 
-    commentPromise.then(() => {
-      setComments([...comments, credentials]);
-      setText("");
-    });
+      commentPromise.then(() => {
+        setComments([...comments, credentials]);
+        setText("");
+      });
+    } else {
+      return toast.error("User blocked all comments on this post!");
+    }
   };
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [comments]);
+
+  const { userId } = availableUser;
 
   return (
     <>
@@ -126,7 +145,9 @@ const Post = () => {
                     />
                     <p>{user?.username}</p>
                   </div>
-                  <Link to="/messages">Message</Link>
+                  {userId === post?.userId ? null : (
+                    <Link to="/messages">Message</Link>
+                  )}
                   <BiDotsHorizontalRounded />
                 </div>
                 <div className="poster__desc">
@@ -156,6 +177,7 @@ const Post = () => {
                     ))}
                   </ul>
                 </div>
+
                 <form className="poster__comment" onSubmit={handlSubmit}>
                   <img src={user?.profile ? user?.profile : noAvatar} alt="" />
                   <div className="input__container">
