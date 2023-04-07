@@ -7,7 +7,8 @@ import Upload from "./Upload";
 import UploadSelection from "./UploadSelection";
 import Conversation from "./Conversation";
 import Message from "./Message";
-
+import { CustomToast } from "./CustomToast";
+import Offline from "./Offline";
 export {
   Sidebar,
   Navbar,
@@ -18,4 +19,6 @@ export {
   UploadSelection,
   Conversation,
   Message,
+  CustomToast,
+  Offline,
 };

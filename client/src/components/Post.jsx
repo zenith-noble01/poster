@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Post = ({ poster }) => {
-  console.log(poster);
   return (
     <div
       className="post__container"

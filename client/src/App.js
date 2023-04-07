@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { toast, Toaster } from "react-hot-toast";
+import {} from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import { NewPost } from "./components";
+import { NewPost, Offline } from "./components";
 import {
   Hero,
   Home,
@@ -20,18 +22,37 @@ const App = () => {
 
   const user = useSelector((state) => state.auth.user);
 
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    window.addEventListener("online", () => setIsOnline(true));
+
+    window.addEventListener("offline", () => setIsOnline(false));
+
+    if (isOnline) {
+      // toast.success("You're online");
+    } else {
+      toast.error("You're offline");
+    }
+  }, [isOnline]);
+
   return (
     <div className="App" data-theme={theme}>
-      <Routes>
-        <Route path="/" element={user ? <Home /> : <Hero />} />
-        <Route path="/poster/:id" element={<Post />} />
-        <Route path="/recent" element={<Recent />} />
-        <Route path="/messages" element={user ? <Messenger /> : <Signin />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/profile/:id" element={<Signin />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Toaster position="bottom-left" reverseOrder={false} />
+      {isOnline ? (
+        <Routes>
+          <Route path="/" element={user ? <Home /> : <Hero />} />
+          <Route path="/poster/:id" element={<Post />} />
+          <Route path="/recent" element={<Recent />} />
+          <Route path="/messages" element={user ? <Messenger /> : <Signin />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/profile/:id" element={<Signin />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      ) : (
+        <Offline />
+      )}
 
       {poster && <NewPost />}
     </div>

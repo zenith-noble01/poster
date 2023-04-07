@@ -1,0 +1,15 @@
+@import "./constants";
+@import "./variables";
+
+.app__offline {
+  width: 100%;
+  min-height: 100vh;
+  @include flexCenter;
+  @include flexDirection(column);
+
+  gap: $gap;
+
+  h1 {
+    @include flexAlign;
+  }
+}
