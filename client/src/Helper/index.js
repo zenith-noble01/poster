@@ -118,3 +118,14 @@ export async function comomentPost(credentials) {
     console.log(error);
   }
 }
+
+export async function createNewConversation(credentials) {
+  try {
+    const {
+      data: { msg },
+    } = await axios.post(`${apiRoute}/conversation`, credentials);
+    return Promise.resolve(msg);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}

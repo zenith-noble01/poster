@@ -3,11 +3,19 @@ import Conversation from "../models/conversation.js";
 //new conv
 
 const newConversation = async (req, res) => {
-  const newConversation = new Conversation({
-    members: [req.body.senderId, req.body.receiverId],
-  });
-
   try {
+    // Check if conversation already exists
+    const conversation = await Conversation.findOne({
+      members: { $all: [req.body.senderId, req.body.receiverId] },
+    });
+    if (conversation) {
+      return res.status(400).json({ message: "Conversation already exists" });
+    }
+
+    // Create new conversation
+    const newConversation = new Conversation({
+      members: [req.body.senderId, req.body.receiverId],
+    });
     const savedConversation = await newConversation.save();
     res.status(200).json(savedConversation);
   } catch (err) {

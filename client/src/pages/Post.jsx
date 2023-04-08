@@ -3,10 +3,10 @@ import { Sidebar, Navbar } from "../components";
 import { noAvatar, notFound } from "../Images";
 import { BiDotsHorizontalRounded, BiSmile } from "react-icons/bi";
 import { apiRoute } from "../Constants";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { comomentPost, getUser } from "../Helper";
+import { comomentPost, createNewConversation, getUser } from "../Helper";
 import { toast, Toaster } from "react-hot-toast";
 const Post = () => {
   const location = useLocation();
@@ -21,6 +21,7 @@ const Post = () => {
 
   const pathname = location.pathname.split("/")[2];
 
+  const navigate = useNavigate();
   useEffect(() => {
     const getAPost = async () => {
       try {
@@ -116,6 +117,42 @@ const Post = () => {
 
   const { userId } = availableUser;
 
+  const handleCreateConversation = async () => {
+    const conversation = {
+      senderId: userId,
+      receiverId: post?.userId,
+    };
+
+    let conversationPromise = createNewConversation(conversation);
+
+    toast.promise(conversationPromise, {
+      loading: "Creating a new Conversation...",
+      success: <b>Created Successfully!</b>,
+      error: <b>Could not create Conversation!</b>,
+    });
+
+    conversationPromise
+      .then(() => {
+        setTimeout(() => {
+          navigate("/messages");
+        }, 1000);
+      })
+      .catch((error) => {
+        const {
+          response: {
+            data: { message },
+          },
+        } = error;
+
+        if (message === "Conversation already exists") {
+          toast.error("Conversation already exists");
+          setTimeout(() => {
+            navigate("/messages");
+          }, 1000);
+        }
+      });
+  };
+
   return (
     <>
       {postNotFound ? (
@@ -146,7 +183,7 @@ const Post = () => {
                     <p>{user?.username}</p>
                   </div>
                   {userId === post?.userId ? null : (
-                    <Link to="/messages">Message</Link>
+                    <button onClick={handleCreateConversation}>Message</button>
                   )}
                   <BiDotsHorizontalRounded />
                 </div>
