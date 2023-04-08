@@ -5,7 +5,7 @@ const theme = JSON.parse(localStorage.getItem("theme"));
 
 export const themeSlice = createSlice({
   name: "theme",
-  initialState: theme ? theme : "dark",
+  initialState: theme ? theme : "light",
   reducers: {
     toogleTheme: (state) => {
       localStorage.setItem(

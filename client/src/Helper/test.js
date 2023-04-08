@@ -212,3 +212,37 @@ export async function resetPassword({ username, password }) {
 //   );
 // };
 // This is just a basic example of how to create a search hook with Redux. You can customize it to fit your specific needs.
+
+//  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+//  useEffect(() => {
+//    const handleOnline = () => {
+//      setIsOnline(true);
+//      toast.dismiss();
+//      toast.success(
+//        <div>
+//          <FaWifi />
+//          <span>You're back online!</span>
+//        </div>
+//      );
+//    };
+
+//    const handleOffline = () => {
+//      setIsOnline(false);
+//      toast.dismiss();
+//      toast.error(
+//        <div>
+//          <FaWifiSlash />
+//          <span>You're offline</span>
+//        </div>
+//      );
+//    };
+
+//    window.addEventListener("online", handleOnline);
+//    window.addEventListener("offline", handleOffline);
+
+//    return () => {
+//      window.removeEventListener("online", handleOnline);
+//      window.removeEventListener("offline", handleOffline);
+//    };
+//  }, []);

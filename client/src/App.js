@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { toast, Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import {} from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import { NewPost, Offline } from "./components";
+import { NewPost } from "./components";
+import { useOnlineStatus, Offline } from "./components/Offline";
+
 import {
   Hero,
   Home,
@@ -22,19 +23,7 @@ const App = () => {
 
   const user = useSelector((state) => state.auth.user);
 
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
-
-  useEffect(() => {
-    window.addEventListener("online", () => setIsOnline(true));
-
-    window.addEventListener("offline", () => setIsOnline(false));
-
-    if (isOnline) {
-      // toast.success("You're online");
-    } else {
-      toast.error("You're offline");
-    }
-  }, [isOnline]);
+  const isOnline = useOnlineStatus();
 
   return (
     <div className="App" data-theme={theme}>
