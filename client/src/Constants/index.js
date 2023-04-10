@@ -225,8 +225,8 @@ export const comments = [
   },
 ];
 
-export const serverRoute = "http://localhost:5000/api";
-export const apiRoute = "https://poster-xg3x.onrender.com/api";
+export const apiRoute = "http://localhost:5000/api";
+export const Route = "https://poster-xg3x.onrender.com/api";
 
 export const tags = [
   {
@@ -275,19 +275,19 @@ export const conversations = [
 
 export const messages = [
   {
-    text: "lore me sdnajndja adjknfajd aadn",
+    text: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus voluptas nulla quia, repudiandae temporibus blanditiis saepe fugiat deserunt? Ut qui corrupti, amet natus ratione pariatur nihil expedita blanditiis dolorum autem!",
     own: false,
   },
   {
-    text: "lore me sdnajndja adjknfajd aadn",
+    text: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus voluptas nulla quia, repudiandae temporibus blanditiis saepe fugiat deserunt? Ut qui corrupti, amet natus ratione pariatur nihil expedita blanditiis dolorum autem!",
     own: true,
   },
   {
-    text: "lore me sdnajndja adjknfajd aadn",
+    text: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus voluptas nulla quia, repudiandae temporibus blanditiis saepe fugiat deserunt? Ut qui corrupti, amet natus ratione pariatur nihil expedita blanditiis dolorum autem!",
     own: false,
   },
   {
-    text: "lore me sdnajndja adjknfajd aadn",
+    text: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus voluptas nulla quia, repudiandae temporibus blanditiis saepe fugiat deserunt? Ut qui corrupti, amet natus ratione pariatur nihil expedita blanditiis dolorum autem!",
     own: true,
   },
 ];

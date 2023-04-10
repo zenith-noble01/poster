@@ -24,18 +24,15 @@ const newConversation = async (req, res) => {
 };
 
 //get conv of a user
-
 const getConversation = async (req, res) => {
+  const { userId } = req.params;
   try {
-    const conversation = await Conversation.find({
-      members: { $in: [req.params.userId] },
-    });
+    const conversation = await Conversation.find({ members: userId });
     res.status(200).json(conversation);
-  } catch (err) {
-    res.status(500).json(err);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
-
 // get conv includes two userId
 
 const getConversationBetweenUsers = async (req, res) => {

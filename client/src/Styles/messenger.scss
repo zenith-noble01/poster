@@ -14,7 +14,7 @@
       flex: 1;
       border-right: var(--border);
 
-      /*    .search__container {
+      .search__container {
         @include flexAlign;
         width: 100%;
         border-bottom: var(--border);
@@ -27,7 +27,7 @@
           color: var(--text-color);
           @include input;
         }
-      } */
+      }
 
       .sidebar__conversations {
         flex: 1;
@@ -68,12 +68,11 @@
     .message__container {
       @include flexDirection(column);
       flex: 3;
-
       .message__wrapper {
         flex: 1;
         overflow-y: auto;
         @include flexDirection(column);
-        gap: $sm-gap;
+        gap: 1.5rem;
         padding: $sm-gap;
         width: 100%;
 
@@ -82,14 +81,33 @@
           @include flexDirection(row);
 
           &.not {
+            position: relative;
             .message__container {
               max-width: 60%;
-              background: var(--dashed);
-              padding: 0.5rem;
-              border-radius: 5px;
-              position: relative;
-              padding-left: $gap;
-              p {
+
+              .text__content {
+                width: fit-content;
+                background: var(--dashed);
+                padding: 0.5rem;
+                padding-top: 0;
+                position: relative;
+                padding-left: 28px;
+                border-bottom-right-radius: 5px;
+
+                &::after {
+                  content: "";
+                  height: 10px;
+                  width: calc(100% - 20px);
+                  background: var(--dashed);
+                  position: absolute;
+                  top: -10px;
+                  left: 20px;
+                  border-top-right-radius: 5px;
+                  border-top-left-radius: 5px;
+                }
+              }
+
+              .invissible {
                 height: 100%;
                 width: 20px;
                 background: var(--secondary-color);
@@ -102,15 +120,38 @@
           }
 
           &.own {
-            justify-content: flex-end;
             .message__container {
-              max-width: 60%;
-              background: var(--primary-color);
-              padding: 0.7rem;
-              border-radius: 5px;
+              width: 100%;
+              display: flex;
+              align-items: flex-end;
+              justify-content: flex-end;
               position: relative;
-              padding-right: $gap;
-              p {
+              .text__content {
+                background: var(--primary-color);
+                padding: 0.5rem;
+                border-radius: 5px;
+                border-top-left-radius: 0;
+                position: relative;
+                padding-right: $gap;
+                padding-top: 0;
+                text-align: left;
+                width: fit-content;
+                max-width: 60%;
+
+                &::after {
+                  content: "";
+                  height: 10px;
+                  width: calc(100% - 20px);
+                  background: var(--primary-color);
+                  position: absolute;
+                  top: -10px;
+                  right: 20px;
+                  border-top-right-radius: 5px;
+                  border-top-left-radius: 5px;
+                }
+              }
+
+              .invissible {
                 height: 100%;
                 width: 20px;
                 background: var(--secondary-color);
