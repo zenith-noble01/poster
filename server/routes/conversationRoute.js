@@ -8,6 +8,6 @@ const router = Router();
 
 //routes
 router.post("/", newConversation);
-router.get("/:id", getConversation);
+router.get("/:userId", getConversation);
 
 export default router;
