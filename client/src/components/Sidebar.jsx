@@ -8,6 +8,7 @@ import { BiMoon, BiSun } from "react-icons/bi";
 import { getUser } from "../Helper";
 import { noAvatar } from "../Images";
 import axios from "axios";
+import GreetingsAnimation from "./Greetings";
 
 const Sidebar = () => {
   const theme = useSelector((state) => state.theme);
@@ -29,7 +30,7 @@ const Sidebar = () => {
   return (
     <div className="app__sidebar">
       <div className="logo">
-        <h1>Poster</h1>
+        <GreetingsAnimation />
       </div>
       <ul className="sidebar__routes">
         {sidebarRoutes.map((route, index) => (

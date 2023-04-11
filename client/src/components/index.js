@@ -7,6 +7,7 @@ import Upload from "./Upload";
 import UploadSelection from "./UploadSelection";
 import Conversation from "./Conversation";
 import Message from "./Message";
+import GreetingsAnimation from "./Greetings";
 import { CustomToast } from "./CustomToast";
 export {
   Sidebar,
@@ -19,4 +20,5 @@ export {
   Conversation,
   Message,
   CustomToast,
+  GreetingsAnimation,
 };
