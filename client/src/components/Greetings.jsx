@@ -14,7 +14,7 @@ const GreetingsAnimation = () => {
     } else if (hour >= 12 && hour < 18) {
       setGreetings("Good afternoon 🌞");
     } else {
-      setGreetings("Good evening 🌒");
+      setGreetings("Good evening 🌚");
     }
 
     const timeoutId = setTimeout(() => {
