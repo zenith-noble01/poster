@@ -1,6 +1,6 @@
-const Message = ({ message }) => {
+const Message = ({ message, own }) => {
   return (
-    <div className={`message ${message.own ? "own" : "not"}`}>
+    <div className={`message ${own ? "own" : "not"}`}>
       <div className="message__container">
         <p className="text__content">{message?.text}</p>
         <p className="invissible"></p>

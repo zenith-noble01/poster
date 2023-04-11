@@ -12,9 +12,11 @@ const Messenger = () => {
   const [conversations, setConversations] = useState([]);
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState("");
-  const [lastMessage, setLastMessage] = useState({});
+  const [noMessage, setNoMessage] = useState("");
   const [currentChat, setCurrentChat] = useState(null);
   const [activeChat, setActiveChat] = useState(null); // Add a new state variable to store the ID of the active chat
+
+  const [id, setId] = useState(null);
 
   const scrollRef = useRef();
 
@@ -22,6 +24,7 @@ const Messenger = () => {
     const fetchConversations = async () => {
       try {
         const { userId } = await getUser();
+        setId(userId);
         const { data } = await axios.get(`${apiRoute}/conversation/${userId}`);
         setConversations(data);
       } catch (error) {
@@ -41,10 +44,13 @@ const Messenger = () => {
 
     const message = {
       text,
-      own: true,
+      sender: id,
+      conversationId,
     };
 
-    setMessages([...messages, message]);
+    const { data } = await axios.post(`${apiRoute}/message`, message);
+
+    setMessages([...messages, data]);
 
     setText("");
   };
@@ -58,6 +64,26 @@ const Messenger = () => {
     setActiveChat(conversation?._id);
   };
 
+  useEffect(() => {
+    const getMessages = async () => {
+      try {
+        const { data } = await axios.get(`${apiRoute}/message/${activeChat}`);
+
+        if (data.msg === "No messages yet") {
+          setNoMessage(data.msg);
+          setMessages([]);
+        } else {
+          setMessages(data);
+          setNoMessage("");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getMessages();
+  }, [activeChat, messages]);
+
   const renderConversations = () => {
     return conversations.map((conversation, index) => (
       <div onClick={() => handleConversationClick(conversation)} key={index}>
@@ -70,13 +96,14 @@ const Messenger = () => {
     ));
   };
 
-  const renderMessages = () => {
-    return messages.map((message, index) => (
-      <Message message={message} key={index} />
-    ));
-  };
-
-  console.log(lastMessage);
+  const renderMessages = () =>
+    noMessage ? (
+      <p>{noMessage}</p>
+    ) : (
+      messages.map((message, index) => (
+        <Message message={message} key={index} own={message?.sender === id} />
+      ))
+    );
 
   return (
     <div className="app__messenger">

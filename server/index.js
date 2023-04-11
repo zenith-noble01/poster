@@ -7,6 +7,7 @@ import conversationRoute from "./routes/conversationRoute.js";
 import userRoute from "./routes/userRoute.js";
 import postRoute from "./routes/postRoute.js";
 import commentRoute from "./routes/commentRoute.js";
+import messageRoute from "./routes/messageRoute.js";
 import bodyParser from "body-parser";
 
 dotenv.config();
@@ -30,6 +31,7 @@ app.use("/api/conversation", conversationRoute);
 app.use("/api/auth", userRoute);
 app.use("/api/post", postRoute);
 app.use("/api/comment", commentRoute);
+app.use("/api/message", messageRoute);
 
 connectDb();
 
