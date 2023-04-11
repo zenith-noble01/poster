@@ -61,6 +61,10 @@
           &:hover {
             background: var(--acent-color);
           }
+
+          &.active {
+            background: red;
+          }
         }
       }
     }
@@ -189,6 +193,37 @@
           background: var(--g-color);
           color: whitesmoke;
           border-radius: 8px;
+        }
+      }
+
+      .no__chat__container {
+        height: 100%;
+        width: 100%;
+        @include flexCenter;
+        flex-direction: column;
+        gap: $sm-gap;
+        transition: $trans;
+
+        .message__icon {
+          height: 100px;
+          width: 100px;
+          border-radius: 50%;
+          @include flexCenter;
+          border: var(--border);
+          font-size: 2rem;
+          color: var(--text-color);
+          transition: $trans;
+        }
+
+        p {
+          @include flexDirection(column);
+          text-align: center;
+          font-size: 1.5rem;
+          gap: 0.5rem;
+
+          span {
+            font-size: 0.9rem;
+          }
         }
       }
     }
