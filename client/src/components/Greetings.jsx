@@ -24,7 +24,7 @@ const GreetingsAnimation = () => {
     return () => clearTimeout(timeoutId);
   }, []);
 
-  const poster = "Poster";
+  const poster = "Poster 🔥";
 
   return (
     <div>
