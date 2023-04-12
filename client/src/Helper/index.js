@@ -22,7 +22,7 @@ export const covertImageToBase64 = (file) => {
 
 export async function getUser() {
   const token = localStorage.getItem("user");
-  if (!token) return Promise.reject("Cannot find Token");
+  if (!token) return "Cannot find Token";
   let decode = jwt_decode(token);
   return decode;
 }

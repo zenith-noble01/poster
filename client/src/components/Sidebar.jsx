@@ -27,6 +27,8 @@ const Sidebar = () => {
   const handleChangeTheme = () => {
     dispatch(toogleTheme());
   };
+
+  console.log(user);
   return (
     <div className="app__sidebar">
       <div className="logo">
