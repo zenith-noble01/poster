@@ -113,7 +113,9 @@ const Post = () => {
   };
 
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+    scrollRef.current?.lastElementChild?.scrollIntoView({
+      behavior: "smooth",
+    });
   }, [comments]);
 
   const { userId } = availableUser;
@@ -152,6 +154,17 @@ const Post = () => {
           }, 1000);
         }
       });
+  };
+
+  const renderComments = () => {
+    return comments?.map((comment, index) => (
+      <li key={comment?._id || index}>
+        <Link to={`/profile/${commentUser?._id}`}>
+          <img src={commentUser?.profile ? user?.profile : noAvatar} alt="" />
+        </Link>
+        <span>{comment?.text}</span>
+      </li>
+    ));
   };
 
   return (
@@ -200,19 +213,8 @@ const Post = () => {
                   </p>
 
                   <ul className="post__comments" ref={scrollRef}>
-                    {comments?.map((comment, index) => (
-                      <li key={comment?._id || index}>
-                        <Link to={`/profile/${commentUser?._id}`}>
-                          <img
-                            src={
-                              commentUser?.profile ? user?.profile : noAvatar
-                            }
-                            alt=""
-                          />
-                        </Link>
-                        <span>{comment?.text}</span>
-                      </li>
-                    ))}
+                    {renderComments()}
+                    <div ref={scrollRef}></div>
                   </ul>
                 </div>
 

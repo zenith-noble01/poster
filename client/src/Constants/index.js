@@ -225,8 +225,8 @@ export const comments = [
   },
 ];
 
-export const Route = "http://localhost:5000/api";
-export const apiRoute = "https://poster-xg3x.onrender.com/api";
+export const apiRoute = "http://localhost:5000/api";
+export const Route = "https://poster-xg3x.onrender.com/api";
 
 export const tags = [
   {

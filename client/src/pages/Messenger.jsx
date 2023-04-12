@@ -18,7 +18,7 @@ const Messenger = () => {
 
   const [id, setId] = useState(null);
 
-  const scrollRef = useRef();
+  const messageWrapperRef = useRef(null);
 
   useEffect(() => {
     const fetchConversations = async () => {
@@ -55,10 +55,6 @@ const Messenger = () => {
     setText("");
   };
 
-  useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
   const handleConversationClick = (conversation) => {
     setCurrentChat(conversation);
     setActiveChat(conversation?._id);
@@ -82,7 +78,7 @@ const Messenger = () => {
     };
 
     getMessages();
-  }, [activeChat, messages]);
+  }, [activeChat]);
 
   const renderConversations = () => {
     return conversations.map((conversation, index) => (
@@ -105,6 +101,12 @@ const Messenger = () => {
       ))
     );
 
+  useEffect(() => {
+    messageWrapperRef.current?.lastElementChild?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }, [messages]);
+
   return (
     <div className="app__messenger">
       <Navbar />
@@ -121,11 +123,11 @@ const Messenger = () => {
             <>
               <div
                 className="message__wrapper"
-                ref={scrollRef}
+                ref={messageWrapperRef}
                 style={{ height: "calc(100% - 60px)", overflowY: "auto" }}
               >
                 {renderMessages()}
-                <div ref={scrollRef}></div>
+                <div ref={messageWrapperRef}></div>
               </div>
               <form
                 className="input__container"

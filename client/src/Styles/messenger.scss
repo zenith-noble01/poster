@@ -72,9 +72,10 @@
     .message__container {
       @include flexDirection(column);
       flex: 3;
+      height: 100%;
+
       .message__wrapper {
-        flex: 1;
-        overflow-y: auto;
+        overflow-y: auto !important;
         @include flexDirection(column);
         gap: 1.5rem;
         padding: $sm-gap;
@@ -83,6 +84,7 @@
         .message {
           width: 100%;
           @include flexDirection(row);
+          height: fit-content;
 
           &.not {
             position: relative;
@@ -175,6 +177,7 @@
         border-top: var(--border);
         padding: $sm-gap;
         gap: $sm-gap;
+        height: 80px;
 
         textarea {
           flex: 1;
