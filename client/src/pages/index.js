@@ -7,6 +7,7 @@ import Signin from "./Signin";
 import Hero from "./Hero";
 import NotFound from "./NotFound";
 import Profile from "./Profile";
+import Settings from "./Settings";
 
 export {
   Home,
@@ -18,4 +19,5 @@ export {
   Signin,
   NotFound,
   Profile,
+  Settings,
 };

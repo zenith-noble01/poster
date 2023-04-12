@@ -14,6 +14,7 @@ import {
   Recent,
   Signin,
   SignUp,
+  Settings,
 } from "./pages";
 import "./Styles/app.scss";
 
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/profile/:id" element={<Signin />} />
+          <Route path="/settings" element={<Settings />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       ) : (

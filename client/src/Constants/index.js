@@ -22,6 +22,7 @@ import { SlHome } from "react-icons/sl";
 import { MdCardMembership, MdGroups } from "react-icons/md";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 // import { BsCalendar4Event } from "react-icons/bs";
+import { AiOutlineSetting } from "react-icons/ai";
 
 export const sidebarRoutes = [
   {
@@ -48,6 +49,11 @@ export const sidebarRoutes = [
     name: "Messages",
     path: "/messages",
     icon: MdCardMembership,
+  },
+  {
+    name: "Settings",
+    path: "/settings",
+    icon: AiOutlineSetting,
   },
 ];
 
