@@ -29,7 +29,7 @@ const GreetingsAnimation = () => {
   return (
     <div>
       {showGreetings ? (
-        <h1 className="animate__animated animate__fadeInDown">{greetings}</h1>
+        <h3 className="animate__animated animate__fadeInDown">{greetings}</h3>
       ) : (
         <h1 className="animate__animated animate__fadeInUp">{poster}</h1>
       )}
