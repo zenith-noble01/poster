@@ -111,7 +111,7 @@ function Hero() {
               Say goodbye to costly flyers and low response rates with Poster.
             </p>
             <motion.a
-              href="#"
+              href="/signin"
               className="cta-button"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
