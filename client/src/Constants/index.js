@@ -231,6 +231,32 @@ export const comments = [
   },
 ];
 
+export const features = [
+  {
+    name: "Create stunning event flyers in minutes",
+  },
+  {
+    name: " Showcase your events to a wide audience of potential attendees",
+  },
+  {
+    name: "Affordable and effective solution to traditional flyer production",
+  },
+  {
+    name: "Discover new experiences and reach more people with Poster",
+  },
+];
+export const pricing = [
+  {
+    name: "Basic Plan - Free",
+  },
+  {
+    name: "Premium Plan - $9.99/month",
+  },
+  {
+    name: "Enterprise Plan - Contact us for pricing",
+  },
+];
+
 export const apiRoute = "http://localhost:5000/api";
 export const Route = "https://poster-xg3x.onrender.com/api";
 

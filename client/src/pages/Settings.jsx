@@ -21,7 +21,7 @@ const Settings = () => {
 
   useEffect(() => {
     !user && navigate("/");
-  });
+  }, [user, navigate]);
 
   return (
     <div className="app__settings">

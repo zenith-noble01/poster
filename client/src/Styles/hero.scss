@@ -2,78 +2,181 @@
 @import "./variables";
 
 .app__hero {
-  min-height: 100vh;
-  background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.613),
-      rgba(3, 3, 3, 0.921)
-    ),
-    url(../Images/bg.jpg);
-
-  background-position: center;
-  background-size: cover;
   width: 100%;
+  padding: 0 10%;
+  transition: all $trans;
 
-  .hero__navbar {
-    @include flexBetween;
+  header {
     width: 100%;
-    transition: $trans;
-    @include flexAlign;
-    padding: 0 10%;
-    // background: red;
     height: 70px;
-    color: var(--g-color);
+    @include flexAlign;
 
-    .hero__cta {
-      a {
-        @include button;
-        color: whitesmoke;
-        background: var(--g-color);
-        padding: 0.5rem 3rem;
-        border-radius: 8px;
-        transition: $trans;
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
 
-        &:hover {
-          background: var(--tg-color);
+      ul {
+        @include flexDirection(row);
+        @include flexAlign;
+        gap: $gap;
+
+        .cta {
+          @include button;
+          background: var(--g-color);
+          @include flexCenter;
+          color: whitesmoke;
+          border-radius: 10px 30px;
+          padding: 0 $gap;
+        }
+
+        .theme__switcher {
+          height: 50px;
+          width: 50px;
+          cursor: pointer;
+          svg {
+            transition: $trans;
+          }
         }
       }
     }
   }
 
-  .hero__container {
-    height: calc(100vh - 70px);
-    // @include flexCenter;
-    @include flexAlign;
-    padding-top: 10rem;
-    flex-direction: column;
+  footer {
+    padding: $gap;
     text-align: center;
-    gap: 2rem;
+  }
 
-    h2 {
-      text-transform: capitalize;
-      font-size: 3rem;
-      //   color: var(--g-color);
-      color: whitesmoke;
-      text-align: center;
+  .hero {
+    height: calc(100vh - 70px);
+    padding-top: 5rem;
+    @include flexDirection(row);
+    gap: $gap;
 
-      span {
-        font-size: 2.5rem;
-        background: linear-gradient(to right, #438b04, #a1d54f);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+    .left__hero {
+      flex: 1;
+      padding-top: 5rem;
+      @include flexDirection(column);
+      gap: $sm-gap;
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      a {
+        margin-top: $gap;
+        @include button;
+        background: var(--g-color);
+        @include flexCenter;
+        color: whitesmoke;
+        border-radius: 10px 30px;
+        padding: 0 $gap;
+        width: fit-content;
       }
     }
 
-    a {
-      @include button;
-      //   background: var(--g-color);
-      background: black;
-      color: whitesmoke;
-      border-radius: 5px;
-      //   border: var(--border);
-      //   padding: 1rem 3rem;
-      //   text-align: center;
-      @include flexCenter;
+    .right__hero {
+      flex: 1;
+
+      img {
+        border-radius: 20px 10rem;
+        width: 100%;
+        height: 80%;
+        object-fit: cover;
+      }
     }
+  }
+
+  .features {
+    height: fit-content;
+    @include flexDirection(column);
+    gap: $gap;
+    padding: 4rem;
+  }
+  ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $gap;
+    width: 60%;
+    align-self: center;
+
+    div {
+      background: white;
+      padding: $sm-gap;
+      transition: $trans;
+      border-radius: 5px;
+    }
+  }
+
+  .pricing {
+    height: fit-content;
+    @include flexDirection(column);
+    gap: $gap;
+    padding: 4rem;
+    ul {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      width: 100%;
+    }
+  }
+}
+
+h2 {
+  font-size: 3rem;
+  text-align: center;
+}
+.hero,
+.features,
+.pricing,
+.contact {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.hero {
+  animation: fadeInUp 0.5s ease 0.2s forwards;
+}
+
+.features {
+  animation: fadeInUp 0.5s ease 0.4s forwards;
+}
+
+.pricing {
+  animation: fadeInUp 0.5s ease 0.6s forwards;
+}
+
+.contact {
+  animation: fadeInUp 0.5s ease 0.8s forwards;
+}
+
+.cta-button,
+button[type="submit"] {
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 100%;
+  }
+}
+
+.app__hero.dark {
+  background: #17181c;
+
+  ul > div {
+    background: #1e1f23;
   }
 }

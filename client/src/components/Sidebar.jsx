@@ -15,6 +15,8 @@ const Sidebar = () => {
   const [user, setUser] = useState({});
   const dispatch = useDispatch();
 
+  // const stateUser = useSelector((state) => state.auth.user);
+
   useEffect(() => {
     const getUserDetails = async () => {
       const { userId } = await getUser();
@@ -28,7 +30,6 @@ const Sidebar = () => {
     dispatch(toogleTheme());
   };
 
-  console.log(user);
   return (
     <div className="app__sidebar">
       <div className="logo">
@@ -48,7 +49,7 @@ const Sidebar = () => {
             {theme === "dark" ? <BiMoon /> : <BiSun />}
           </div>
         </div>
-        <Link to="/profile/222" className="user__container">
+        <Link to={`/profile/${user?._id}`} className="user__container">
           <img src={user?.profile ? user?.profile : noAvatar} alt="" />
           <p>
             {user?.username} <span>{user?.email}</span>

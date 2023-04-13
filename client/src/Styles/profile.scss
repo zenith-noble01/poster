@@ -1,0 +1,13 @@
+@import "./constants";
+@import "./variables";
+
+.app__profile {
+  width: 100%;
+  @include flexDirection(row);
+  .profile__container {
+    @include flexDirection(column);
+    gap: $gap;
+    min-height: 100vh;
+    width: 75%;
+  }
+}

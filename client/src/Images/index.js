@@ -18,6 +18,8 @@ import img16 from "./img16.jpg";
 import cover from "./cover.png";
 import notFound from "./404.png";
 import noAvatar from "./noAvatar.png";
+import logo from "./logo.png";
+import flyershare from "./flyer.jpg";
 
 export {
   user,
@@ -40,4 +42,6 @@ export {
   img15,
   img16,
   noAvatar,
+  logo,
+  flyershare,
 };
