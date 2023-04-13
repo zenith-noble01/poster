@@ -90,7 +90,7 @@ function Hero() {
               Login
             </Link>
             <div className="theme__switcher" onClick={handleChangeTheme}>
-              {theme === "dark" ? <BiMoon /> : <BiSun />}
+              {theme === "dark" ? <BiMoon className="icon" /> : <BiSun />}
             </div>
           </ul>
         </nav>

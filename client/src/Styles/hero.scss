@@ -21,6 +21,7 @@
         @include flexDirection(row);
         @include flexAlign;
         gap: $gap;
+        justify-content: flex-end;
 
         .cta {
           @include button;
@@ -32,11 +33,14 @@
         }
 
         .theme__switcher {
-          height: 50px;
-          width: 50px;
+          height: 45px;
+          width: 45px;
           cursor: pointer;
-          svg {
+          @include flexCenter;
+
+          .icon {
             transition: $trans;
+            font-size: 5rem;
           }
         }
       }
