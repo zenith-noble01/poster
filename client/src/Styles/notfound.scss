@@ -1,0 +1,14 @@
+@import "./constants";
+@import "./variables";
+
+.app__notfound {
+  @include flexAlign;
+  width: 100%;
+  min-height: 100vh;
+  @include flexCenter;
+  flex-direction: column;
+
+  img {
+    width: 50%;
+  }
+}
