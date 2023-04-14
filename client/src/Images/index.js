@@ -15,15 +15,14 @@ import img13 from "./img13.jpg";
 import img14 from "./img14.jpg";
 import img15 from "./img15.jpg";
 import img16 from "./img16.jpg";
-import cover from "./cover.png";
 import notFound from "./404.png";
 import noAvatar from "./noAvatar.png";
 import logo from "./logo.png";
 import flyershare from "./flyer.jpg";
+import cover from "./cover.jpg";
 
 export {
   user,
-  cover,
   notFound,
   img1,
   img2,
@@ -44,4 +43,5 @@ export {
   noAvatar,
   logo,
   flyershare,
+  cover,
 };
