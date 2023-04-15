@@ -11,8 +11,6 @@ const Settings = () => {
 
   const user = useSelector((state) => state.auth.user);
 
-  console.log(user);
-
   const handleClick = () => {
     dispatch(logoutUser());
 
