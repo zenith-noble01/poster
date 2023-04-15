@@ -24,14 +24,14 @@ const GreetingsAnimation = () => {
     return () => clearTimeout(timeoutId);
   }, []);
 
-  const poster = "Poster 🔥";
+  const poster = "PromoPilot 🔥";
 
   return (
     <div>
       {showGreetings ? (
         <h3 className="animate__animated animate__fadeInDown">{greetings}</h3>
       ) : (
-        <h1 className="animate__animated animate__fadeInUp">{poster}</h1>
+        <h3 className="animate__animated animate__fadeInUp">{poster}</h3>
       )}
     </div>
   );

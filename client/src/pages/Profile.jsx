@@ -26,6 +26,8 @@ const Profile = () => {
     getUser();
   }, [path]);
 
+  console.log(user);
+
   return (
     <div className="app__profile">
       <Sidebar />
